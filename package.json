@@ -1,0 +1,33 @@
+{
+  "name": "deso-standalone-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "pre-commit": "tsc --noEmit && prettier --write src",
+    "check": "tsc --noEmit && prettier --check src",
+    "bundle": "esbuild src/main.ts --bundle --minify --sourcemap --outfile=dist/main.js",
+    "build": "npm run bundle && cp src/index.html dist",
+    "watch": "nodemon --watch src -e ts,css,html --exec \"npm run build\"",
+    "serve": "browser-sync start --server 'dist' --files 'dist/**/*.*'",
+    "tailwind": "tailwindcss -i src/style.css -o dist/style.css --watch",
+    "start": "concurrently \"npm run watch\" \"npm run serve\" \"npm run tailwind\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.29.3",
+    "concurrently": "^8.2.1",
+    "esbuild": "0.19.3",
+    "husky": "^8.0.3",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.3",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "deso-protocol": "^2.5.0"
+  }
+}
