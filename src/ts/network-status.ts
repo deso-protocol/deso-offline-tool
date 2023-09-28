@@ -4,13 +4,13 @@ export function initNetworkStatusIndicator() {
 
   if (!networkOnlineEl) {
     throw new Error(
-      "No network status element found for selector: #networkOnlineIndicator"
+      "No network status element found for selector: #networkOnlineIndicator",
     );
   }
 
   if (!networkOfflineEl) {
     throw new Error(
-      "No network status element found for selector: #networkOfflineIndicator"
+      "No network status element found for selector: #networkOfflineIndicator",
     );
   }
 

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
-    "pre-commit": "tsc --noEmit && prettier --write src",
+    "pre-commit": "tsc --noEmit && prettier --write src && git add .",
     "check": "tsc --noEmit && prettier --check src",
     "bundle": "esbuild src/ts/main.ts --bundle --minify --sourcemap --outfile=dist/main.js",
     "build": "npm run bundle && cp src/index.html dist",

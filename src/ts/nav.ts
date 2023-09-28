@@ -9,7 +9,9 @@ export function initNav() {
   }
 
   if (!activeButton) {
-    throw new Error(`No active button found for selector: [data-tab='${INITIAL_TAB_ID}']`);
+    throw new Error(
+      `No active button found for selector: [data-tab='${INITIAL_TAB_ID}']`,
+    );
   }
 
   activeTab.classList.remove("hidden");

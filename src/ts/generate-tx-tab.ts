@@ -33,24 +33,24 @@ export function initGenerateTxnTab() {
       {
         checkPermissions: false,
         broadcast: false,
-      }
+      },
     );
 
     const txHexSection = document.getElementById("transactionHexSection");
 
     if (!txHexSection) {
       throw new Error(
-        "No transaction hex section found for selector: #transactionHexSection"
+        "No transaction hex section found for selector: #transactionHexSection",
       );
     }
 
     const txHexContainer = txHexSection.querySelector(
-      "#transactionHexContainer"
+      "#transactionHexContainer",
     );
 
     if (!txHexContainer) {
       throw new Error(
-        "No transaction hex container found for selector: #transactionHexContainer"
+        "No transaction hex container found for selector: #transactionHexContainer",
       );
     }
 
