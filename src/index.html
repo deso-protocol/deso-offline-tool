@@ -3,11 +3,335 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DeSo Standalone</title>
+    <title>DeSo Offline Tool</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="bg-blue-500">
-    <div class="bg-white">Hello world</div>
+  <body>
+    <div class="max-w-7xl mx-auto">
+      <header>
+        <h1>DeSo Offline Tool</h1>
+      </header>
+      <nav
+        id="main-nav"
+        class="bg-gray-800 mx-auto px-8 flex h-16 items-center"
+      >
+        <div class="flex-shrink-0">
+          <svg
+            height="63"
+            width="63"
+            viewBox="0 0 249 63"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0.0012207 0.447998V15.9561L39.6692 38.6314L0.0012207 62.4901H32.6853C43.1286 62.4901 51.5872 54.8553 51.5872 45.4359V31.4738L0.0012207 0.447998Z"
+              fill="url(#:r0:)"
+            ></path>
+            <path
+              d="M0.0012207 0.447998L51.5872 31.4738V17.5022C51.5872 8.08276 43.1194 0.447998 32.6853 0.447998H0.0012207Z"
+              fill="url(#:r1:)"
+            ></path>
+            <path
+              d="M27.1378 31.4739L0 46.982V62.4902L39.668 38.6315L27.1378 31.4739Z"
+              fill="url(#:r2:)"
+            ></path>
+            <path
+              d="M93.0674 5.23312C97.9511 5.23312 102.436 6.40468 106.523 8.74777C110.659 11.041 113.923 14.2067 116.315 18.2448C118.707 22.2331 119.903 26.67 119.903 31.5556C119.903 36.4412 118.707 40.8782 116.315 44.8664C113.923 48.8048 110.659 51.9206 106.523 54.2139C102.436 56.4573 97.9511 57.579 93.0674 57.579H72.2869V5.23312H93.0674ZM93.0674 48.3063C96.207 48.3063 99.0724 47.5834 101.664 46.1377C104.255 44.6421 106.298 42.5981 107.793 40.0057C109.338 37.4134 110.111 34.5717 110.111 31.4808C110.111 28.3899 109.338 25.5483 107.793 22.9559C106.298 20.3137 104.255 18.2448 101.664 16.7492C99.0724 15.2536 96.207 14.5058 93.0674 14.5058H82.0792V48.3063H93.0674Z"
+              fill="#FFFDF5"
+            ></path>
+            <path
+              d="M143.641 19.2169C147.229 19.2169 150.443 20.1143 153.283 21.909C156.174 23.6539 158.416 26.0219 160.011 29.0131C161.606 32.0043 162.403 35.3195 162.403 38.9588C162.403 40.1553 162.303 41.2521 162.104 42.2491H133.25C133.998 44.8913 135.318 46.9602 137.212 48.4558C139.106 49.9016 141.523 50.6245 144.463 50.6245C146.257 50.6245 147.976 50.2256 149.621 49.428C151.315 48.6303 152.586 47.6083 153.433 46.362L160.534 50.5497C158.79 53.142 156.523 55.1362 153.732 56.5321C150.991 57.8781 147.827 58.5511 144.239 58.5511C140.252 58.5511 136.714 57.7036 133.624 56.0086C130.534 54.3136 128.142 51.9705 126.448 48.9793C124.804 45.9881 123.981 42.623 123.981 38.884C123.981 35.1949 124.804 31.8547 126.448 28.8635C128.142 25.8723 130.485 23.5292 133.475 21.8342C136.465 20.0894 139.853 19.2169 143.641 19.2169ZM153.732 34.9955C153.333 32.6025 152.212 30.733 150.368 29.387C148.574 27.9911 146.307 27.2932 143.566 27.2932C141.672 27.2932 139.928 27.6421 138.333 28.3401C136.789 29.038 135.543 29.9852 134.596 31.1817C133.649 32.3782 133.151 33.6494 133.101 34.9955H153.732Z"
+              fill="#FFFDF5"
+            ></path>
+            <path
+              d="M187.667 58.5511C182.535 58.5511 178.224 57.4045 174.736 55.1112C171.247 52.818 168.805 49.7271 167.41 45.8386L175.633 40.9779C177.676 46.3122 181.762 48.9793 187.892 48.9793C190.633 48.9793 192.75 48.3312 194.245 47.035C195.74 45.7388 196.488 44.2433 196.488 42.5482C196.488 40.8532 195.666 39.4823 194.021 38.4354C192.427 37.3884 189.561 36.2667 185.425 35.0703C182.186 34.0732 179.445 33.0014 177.202 31.8547C174.96 30.6583 173.116 29.063 171.671 27.0688C170.276 25.0747 169.578 22.5571 169.578 19.5161C169.578 16.4252 170.35 13.7331 171.895 11.4398C173.44 9.09675 175.483 7.32696 178.025 6.13048C180.616 4.88415 183.432 4.26099 186.471 4.26099C190.707 4.26099 194.37 5.28298 197.46 7.32696C200.599 9.32109 203.016 12.1378 204.711 15.7771L196.338 20.563C194.395 16.126 191.106 13.9076 186.471 13.9076C184.378 13.9076 182.659 14.456 181.314 15.5527C179.968 16.6495 179.295 17.9457 179.295 19.4413C179.295 20.5879 179.594 21.56 180.192 22.3577C180.84 23.1553 181.837 23.8782 183.182 24.5263C184.578 25.1744 186.596 25.8973 189.237 26.6949C192.676 27.7917 195.566 28.9383 197.908 30.1348C200.3 31.3313 202.269 33.0014 203.814 35.145C205.408 37.2389 206.206 39.8811 206.206 43.0717C206.206 46.2125 205.408 48.9544 203.814 51.2975C202.219 53.6406 200.001 55.4353 197.161 56.6816C194.37 57.928 191.206 58.5511 187.667 58.5511Z"
+              fill="#FFFDF5"
+            ></path>
+            <path
+              d="M229.341 58.6259C225.803 58.6259 222.514 57.7535 219.474 56.0086C216.484 54.2139 214.092 51.8209 212.298 48.8297C210.553 45.7887 209.681 42.4984 209.681 38.9588C209.681 35.4192 210.553 32.1539 212.298 29.1627C214.092 26.1216 216.484 23.7287 219.474 21.9838C222.514 20.1891 225.803 19.2917 229.341 19.2917C232.879 19.2917 236.143 20.1891 239.133 21.9838C242.173 23.7287 244.565 26.1216 246.309 29.1627C248.103 32.1539 249 35.4192 249 38.9588C249 42.4984 248.103 45.7887 246.309 48.8297C244.565 51.8209 242.173 54.2139 239.133 56.0086C236.143 57.7535 232.879 58.6259 229.341 58.6259ZM229.266 49.3532C231.16 49.3532 232.904 48.9045 234.499 48.0072C236.093 47.06 237.364 45.7887 238.311 44.1934C239.258 42.5981 239.731 40.8532 239.731 38.9588C239.731 37.0644 239.258 35.3195 238.311 33.7242C237.364 32.1289 236.093 30.8577 234.499 29.9105C232.904 28.9632 231.16 28.4896 229.266 28.4896C227.372 28.4896 225.628 28.9632 224.033 29.9105C222.439 30.8577 221.168 32.1289 220.221 33.7242C219.324 35.3195 218.876 37.0644 218.876 38.9588C218.876 40.8532 219.324 42.5981 220.221 44.1934C221.168 45.7887 222.439 47.06 224.033 48.0072C225.628 48.9045 227.372 49.3532 229.266 49.3532Z"
+              fill="#FFFDF5"
+            ></path>
+            <defs>
+              <linearGradient
+                id=":r0:"
+                x1="7.13655"
+                y1="14.012"
+                x2="49.9804"
+                y2="63.9163"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#0085FF"></stop>
+                <stop offset="1" stop-color="#7EC0FF"></stop>
+              </linearGradient>
+              <linearGradient
+                id=":r1:"
+                x1="27.8366"
+                y1="21.8562"
+                x2="44.7284"
+                y2="-1.65607"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#CEEAFF"></stop>
+                <stop offset="0.626823" stop-color="#72B9FF"></stop>
+                <stop
+                  offset="1"
+                  stop-color="#63B1FF"
+                  stop-opacity="0.58"
+                ></stop>
+              </linearGradient>
+              <linearGradient
+                id=":r2:"
+                x1="-8.5524"
+                y1="61.0773"
+                x2="49.4559"
+                y2="27.5892"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#2875EA"></stop>
+                <stop offset="1" stop-color="#082967"></stop>
+                <stop offset="1" stop-color="#0038FF"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <div class="ml-10 flex items-baseline space-x-4">
+          <button data-tab="generate-txn-tab" class="nav-button">
+            Generate Txn
+          </button>
+          <button data-tab="sign-txn-tab" class="nav-button">Sign</button>
+          <button data-tab="broadcast-txn-tab" class="nav-button">
+            Broadcast
+          </button>
+          <button data-tab="verify-txn-tab" class="nav-button">Verify</button>
+        </div>
+
+        <div class="ml-auto flex items-center">
+          <button id="download-button" class="nav-button">
+            <svg
+              width="24"
+              height="24"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="css-i6dzq1"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </button>
+          <a
+            class="nav-button"
+            href="https://github.com/deso-protocol/deso-standalone-app"
+          >
+            <svg
+              height="24"
+              width="24"
+              aria-hidden="true"
+              viewBox="0 0 16 16"
+              version="1.1"
+              data-view-component="true"
+              class="inline-block"
+              fill="currentColor"
+            >
+              <path
+                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
+              ></path>
+            </svg>
+          </a>
+          <div class="ml-3">
+            <span id="networkOnlineIndicator" class="flex flex-col items-center">
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-green-500"
+              >
+                <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                <line x1="12" y1="20" x2="12.01" y2="20"></line>
+              </svg>
+              <span class="text-gray-300 text-xs">online</span>
+            </span>
+            <span id="networkOfflineIndicator" class="flex flex-col items-center hidden">
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-orange-500"
+              >
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+                <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+                <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+                <path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+                <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                <line x1="12" y1="20" x2="12.01" y2="20"></line>
+              </svg>
+              <span class="text-gray-300 text-xs">offline</span>
+            </span>
+          </div>
+        </div>
+      </nav>
+
+      <div class="bg-gray-800 p-12">
+        <div id="generate-txn-tab" class="tab hidden">
+          <form id="send-deso-txn-form">
+            <div class="border-b border-white/10 pb-12 mb-6">
+              <h2 class="text-base font-semibold leading-7 text-white">
+                Send DeSo
+              </h2>
+              <div class="my-10 grid grid-cols-1 gap-x-6 gap-y-8">
+                <div>
+                  <label
+                    for="transactor-public-key"
+                    class="block text-sm font-medium leading-6 text-white"
+                    >Transactor Public Key</label
+                  >
+                  <div class="mt-2">
+                    <div
+                      class="inline-block rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
+                    >
+                      <input
+                        type="text"
+                        id="transactor-public-key"
+                        name="senderPublicKey"
+                        class="flex-1 border-0 bg-transparent p-1.5 text-white focus:ring-0 w-[528px]"
+                        value="BC1YLivYU6g9w3LXNnS7Amiji3AoQQjDNKgTX8GEeaTo7J9551nFCTB"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    for="recipient-public-key"
+                    class="block text-sm font-medium leading-6 text-white"
+                    >Recipient Public Key</label
+                  >
+                  <div class="mt-2">
+                    <div
+                      class="inline-block rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
+                    >
+                      <input
+                        type="text"
+                        id="recipient-public-key"
+                        name="recipientPublicKey"
+                        class="flex-1 border-0 bg-transparent p-1.5 text-white focus:ring-0 w-[528px]"
+                        value="BC1YLi66ZrrTXe5oXSYqir1jjwkez8trwA4GFBEnzP1cDQz9AzcSNij"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    for="deso-amount"
+                    class="block text-sm font-medium leading-6 text-white"
+                    >$DESO Amount</label
+                  >
+                  <div class="mt-2">
+                    <div
+                      class="inline-block rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
+                    >
+                      <input
+                        type="number"
+                        id="deso-amount"
+                        name="desoAmount"
+                        class="flex-1 border-0 bg-transparent p-1.5 text-white focus:ring-0"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                >
+                  Generate
+                </button>
+              </div>
+            </div>
+          </form>
+          <section id="transactionHexSection" class="text-white hidden">
+            <header>
+              <h3>Transaction Hex</h3>
+            </header>
+            <p class="text-sm text-gray-400">
+              You can enter this on the
+              <button
+                class="font-bold text-gray-300"
+                onclick="document.querySelector(`[data-tab='sign-txn-tab']`)?.click();"
+              >
+                Sign Tab
+              </button>
+              to sign it.
+            </p>
+            <div class="flex items-start mt-2">
+              <div
+                class="w-3/4 rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 p-1.5"
+              >
+                <span id="transactionHexContainer" class="break-words"></span>
+              </div>
+              <button
+                id="copyTxnHexButton"
+                class="ml-3 text-gray-300 bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+              >
+                <svg
+                  id="copyTxnHexButtonIcon"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path
+                    d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                  ></path>
+                </svg>
+                <svg
+                  id="copyCheckTxnHexButtonIcon"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="hidden"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <div id="sign-txn-tab" class="tab hidden">Sign Txn</div>
+        <div id="broadcast-txn-tab" class="tab hidden">Broadcast Txn</div>
+        <div id="verify-txn-tab" class="tab hidden">Verify Txn</div>
+      </div>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>

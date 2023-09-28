@@ -7,7 +7,7 @@
     "prepare": "husky install",
     "pre-commit": "tsc --noEmit && prettier --write src",
     "check": "tsc --noEmit && prettier --check src",
-    "bundle": "esbuild src/main.ts --bundle --minify --sourcemap --outfile=dist/main.js",
+    "bundle": "esbuild src/ts/main.ts --bundle --minify --sourcemap --outfile=dist/main.js",
     "build": "npm run bundle && cp src/index.html dist",
     "watch": "nodemon --watch src -e ts,css,html --exec \"npm run build\"",
     "serve": "browser-sync start --server 'dist' --files 'dist/**/*.*'",
@@ -28,6 +28,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.6",
     "deso-protocol": "^2.5.0"
   }
 }
