@@ -1,4 +1,5 @@
 import { sendDeso } from "deso-protocol";
+import { CopyToClipboard } from "./components/copy-to-clipboard";
 
 interface TransferDeSoFormControls extends HTMLFormControlsCollection {
   senderPublicKey: HTMLInputElement;
@@ -8,8 +9,15 @@ interface TransferDeSoFormControls extends HTMLFormControlsCollection {
 
 export function initGenerateTxnTab() {
   const sendDesoTxnForm = document.getElementById("send-deso-txn-form");
-  const copyTxnHexButton = document.getElementById("copyTxnHexButton");
-  let currentTransactionHex = "";
+  const copyTxnHexButton = document.getElementById(
+    "copyTxnHexButton",
+  ) as CopyToClipboard | null;
+
+  if (!copyTxnHexButton) {
+    throw new Error(
+      "No copy txn hex button found for selector: #copyTxnHexButton",
+    );
+  }
 
   sendDesoTxnForm?.addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -54,27 +62,18 @@ export function initGenerateTxnTab() {
       );
     }
 
-    currentTransactionHex =
-      result.constructedTransactionResponse.TransactionHex;
-    txHexContainer.textContent = currentTransactionHex;
+    const txHex = result.constructedTransactionResponse.TransactionHex;
+    txHexContainer.textContent = txHex;
     txHexSection.classList.remove("hidden");
-  });
 
-  copyTxnHexButton?.addEventListener("click", function () {
-    document.getElementById("copyTxnHexButtonIcon")?.classList.add("hidden");
-    document
-      .getElementById("copyCheckTxnHexButtonIcon")
-      ?.classList.remove("hidden");
+    const signTxInput = document.getElementById(
+      "transactionHexToSign",
+    ) as HTMLInputElement | null;
 
-    window.navigator.clipboard.writeText(currentTransactionHex).then(() => {
-      setTimeout(() => {
-        document
-          .getElementById("copyTxnHexButtonIcon")
-          ?.classList.remove("hidden");
-        document
-          .getElementById("copyCheckTxnHexButtonIcon")
-          ?.classList.add("hidden");
-      }, 2000);
-    });
+    if (signTxInput) {
+      signTxInput.value = txHex;
+    }
+
+    copyTxnHexButton.text = txHex;
   });
 }

@@ -13,3 +13,31 @@
 .primary-button {
   @apply rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500;
 }
+
+.tab__title {
+  @apply text-base font-semibold leading-7 text-white;
+}
+
+.input-group label {
+  @apply block text-sm font-medium;
+}
+
+.input-group input {
+  @apply block w-full mt-2 rounded-md border-0 p-1.5 bg-white/5 text-white text-sm shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-500;
+}
+
+.secondary-text {
+  @apply text-gray-400 text-sm;
+}
+
+.inline-button {
+  @apply font-bold text-gray-300 hover:text-white;
+}
+
+form {
+  @apply border border-white/10 pb-12 mb-6 p-4 rounded-md;
+}
+
+.form-controls {
+  @apply mb-10 grid grid-cols-1 gap-x-6 gap-y-8;
+}

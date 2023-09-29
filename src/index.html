@@ -3,17 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DeSo Offline Tool</title>
+    <meta
+      name="description"
+      content="DeSo web application that can be used to securely sign transactions offline."
+    />
+    <title>DeSo Offline Signing Tool</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <div class="max-w-7xl mx-auto">
-      <header>
-        <h1>DeSo Offline Tool</h1>
+  <body class="bg-gray-600">
+    <div
+      class="max-w-7xl mx-auto text-white bg-gray-800 rounded-md mt-4 overflow-hidden"
+    >
+      <header class="p-8 text-center">
+        <h1 class="text-2xl font-bold leading-7 text-white">
+          DeSo Offline Signing Tool
+        </h1>
       </header>
       <nav
         id="main-nav"
-        class="bg-gray-800 mx-auto px-8 flex h-16 items-center"
+        class="bg-gray-800 mx-auto px-8 flex h-16 items-center border border-white/10"
       >
         <div class="flex-shrink-0">
           <svg
@@ -107,7 +115,11 @@
         </div>
 
         <div class="ml-auto flex items-center">
-          <button id="download-button" class="nav-button">
+          <button
+            id="download-button"
+            class="nav-button"
+            aria-label="Download html"
+          >
             <svg
               width="24"
               height="24"
@@ -126,6 +138,7 @@
           <a
             class="nav-button"
             href="https://github.com/deso-protocol/deso-standalone-app"
+            aria-label="View the source on GitHub"
           >
             <svg
               height="24"
@@ -195,93 +208,43 @@
       </nav>
 
       <div class="bg-gray-800 p-12">
-        <div id="generate-txn-tab" class="tab hidden">
-          <form id="send-deso-txn-form">
-            <div class="border-b border-white/10 pb-12 mb-6">
-              <h2 class="text-base font-semibold leading-7 text-white">
-                Send DeSo
-              </h2>
-              <div class="my-10 grid grid-cols-1 gap-x-6 gap-y-8">
-                <div>
-                  <label
-                    for="transactor-public-key"
-                    class="block text-sm font-medium leading-6 text-white"
-                    >Transactor Public Key</label
-                  >
-                  <div class="mt-2">
-                    <div
-                      class="inline-block rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
-                    >
-                      <input
-                        type="text"
-                        id="transactor-public-key"
-                        name="senderPublicKey"
-                        class="flex-1 border-0 bg-transparent p-1.5 text-white focus:ring-0 w-[528px]"
-                        value="BC1YLivYU6g9w3LXNnS7Amiji3AoQQjDNKgTX8GEeaTo7J9551nFCTB"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    for="recipient-public-key"
-                    class="block text-sm font-medium leading-6 text-white"
-                    >Recipient Public Key</label
-                  >
-                  <div class="mt-2">
-                    <div
-                      class="inline-block rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
-                    >
-                      <input
-                        type="text"
-                        id="recipient-public-key"
-                        name="recipientPublicKey"
-                        class="flex-1 border-0 bg-transparent p-1.5 text-white focus:ring-0 w-[528px]"
-                        value="BC1YLi66ZrrTXe5oXSYqir1jjwkez8trwA4GFBEnzP1cDQz9AzcSNij"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    for="deso-amount"
-                    class="block text-sm font-medium leading-6 text-white"
-                    >$DESO Amount</label
-                  >
-                  <div class="mt-2">
-                    <div
-                      class="inline-block rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
-                    >
-                      <input
-                        type="number"
-                        id="deso-amount"
-                        name="desoAmount"
-                        class="flex-1 border-0 bg-transparent p-1.5 text-white focus:ring-0"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                >
-                  Generate
-                </button>
-              </div>
+        <section id="generate-txn-tab" class="tab hidden">
+          <header>
+            <h2 class="tab__title">Generate Transaction</h2>
+            <p>Online</p>
+          </header>
+          <div class="mb-4 py-4 text-secondary"></div>
+          <form id="send-deso-txn-form" class="w-1/2">
+            <section class="form-controls">
+              <header>
+                <h3>Transfer DeSo</h3>
+              </header>
+              <input-group
+                inputId="senderPublicKey"
+                labelText="Transactor Public Key"
+              ></input-group>
+              <input-group
+                inputId="recipientPublicKey"
+                labelText="Recipient Public Key"
+              ></input-group>
+              <input-group
+                inputId="desoAmount"
+                inputType="number"
+                labelText="$DESO Amount"
+              ></input-group>
+            </section>
+            <div>
+              <button type="submit" class="primary-button">Generate</button>
             </div>
           </form>
-          <section id="transactionHexSection" class="text-white hidden">
+          <section id="transactionHexSection" class="hidden">
             <header>
-              <h3>Transaction Hex</h3>
+              <h4>Transaction Hex</h4>
             </header>
-            <p class="text-sm text-gray-400">
+            <p class="secondary-text">
               You can enter this on the
               <button
-                class="font-bold text-gray-300"
+                class="inline-button"
                 onclick="document.querySelector(`[data-tab='sign-txn-tab']`)?.click();"
               >
                 Sign Tab
@@ -294,48 +257,105 @@
               >
                 <span id="transactionHexContainer" class="break-words"></span>
               </div>
-              <button
-                id="copyTxnHexButton"
-                class="ml-3 text-gray-300 bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-              >
-                <svg
-                  id="copyTxnHexButtonIcon"
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path
-                    d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-                  ></path>
-                </svg>
-                <svg
-                  id="copyCheckTxnHexButtonIcon"
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="hidden"
-                >
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-              </button>
+              <copy-to-clipboard id="copyTxnHexButton"></copy-to-clipboard>
             </div>
           </section>
-        </div>
+        </section>
 
-        <div id="sign-txn-tab" class="tab hidden">Sign Txn</div>
-        <div id="broadcast-txn-tab" class="tab hidden">Broadcast Txn</div>
-        <div id="verify-txn-tab" class="tab hidden">Verify Txn</div>
+        <section id="sign-txn-tab" class="tab hidden">
+          <header>
+            <h2 class="tab__title">Sign Transactions or Messages</h2>
+            <p>Offline</p>
+          </header>
+          <div class="py-4 secondary-text mb-4">
+            <p class="mb-2">
+              Enter your seed to sign transactions or arbitrary messages. You
+              can broadcast transactions on the
+              <button
+                class="inline-button"
+                onclick="document.querySelector(`[data-tab='broadcast-txn-tab']`)?.click();"
+              >
+                Broadcast Tab
+              </button>
+              or verify signatures on the
+              <button
+                class="inline-button"
+                onclick="document.querySelector(`[data-tab='verify-txn-tab']`)?.click();"
+              >
+                Verify Tab</button
+              >.
+            </p>
+            <p>
+              This tab can be used offline, so you can download this tool and
+              run it on an air-gapped machine for secure transaction signing.
+            </p>
+          </div>
+          <form id="enterSeedForm" class="w-1/2">
+            <section class="form-controls">
+              <header class="mb-3">
+                <h3>Enter Your DeSo Seed</h3>
+              </header>
+              <input-group
+                labelText="DeSo Seed Phrase"
+                inputId="mnemonic"
+                inputPlaceholder="easily burden captain garment hidden gun economy road inner dance whisper buzz"
+              ></input-group>
+              <input-group
+                labelText="Account Number"
+                inputId="accountNumber"
+                inputValue="0"
+              ></input-group>
+              <input-group
+                labelText="Passphrase (optional)"
+                inputId="passphrase"
+              ></input-group>
+              <input-group
+                labelText="Seed Hex"
+                inputId="seedHex"
+                hintText="Only enter this if you do not have a seed phrase."
+              ></input-group>
+            </section>
+            <div>
+              <button type="submit" class="primary-button">Next</button>
+            </div>
+          </form>
+          <section id="publicKeyBase58Section" class="hidden">
+            <header>
+              <h4>Public Key</h4>
+            </header>
+            <p class="secondary-text">
+              Please confirm that this is the public key you expect to see.
+            </p>
+            <div
+              class="mt-2 w-1/2 rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 p-1.5"
+            >
+              <span id="publicKeyBase58Container" class="break-words"></span>
+            </div>
+          </section>
+
+          <form id="signTxForm" class="w-1/2 hidden mt-10">
+            <section class="form-controls">
+              <header class="mb-3">
+                <h3>Sign Transaction</h3>
+              </header>
+              <div class="input-group">
+                <label for="transactionHex">Txn Hex</label>
+                <p class="secondary-text">
+                  The hex of the transaction you want to sign.
+                </p>
+                <textarea type="text" id="transactionHexToSign "></textarea>
+              </div>
+            </section>
+            <div>
+              <button type="submit" class="primary-button">Sign</button>
+            </div>
+          </form>
+        </section>
+
+        <section id="broadcast-txn-tab" class="tab hidden">
+          Broadcast Txn
+        </section>
+        <section id="verify-txn-tab" class="tab hidden">Verify Txn</section>
       </div>
     </div>
     <script src="main.js"></script>

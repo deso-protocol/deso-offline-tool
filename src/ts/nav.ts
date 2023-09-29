@@ -1,4 +1,5 @@
-const INITIAL_TAB_ID = "generate-txn-tab";
+const INITIAL_TAB_ID =
+  window.localStorage?.getItem("initialTabId") ?? "generate-txn-tab";
 
 export function initNav() {
   let activeTab = document.getElementById(INITIAL_TAB_ID);
@@ -48,5 +49,11 @@ export function initNav() {
 
     clickedTabEl.classList.remove("hidden");
     clickedEl.classList.add("nav-button--active");
+  });
+
+  window.addEventListener("beforeunload", function () {
+    if (activeTab?.id) {
+      window.localStorage?.setItem("initialTabId", activeTab?.id ?? "");
+    }
   });
 }
