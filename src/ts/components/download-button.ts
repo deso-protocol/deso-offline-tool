@@ -1,13 +1,10 @@
-export function initDownloadButton() {
-  const downloadButton = document.getElementById("download-button");
-
-  if (!downloadButton) {
-    throw new Error("No download button found for selector: #download-button");
+export class DownloadButton extends HTMLButtonElement {
+  connectedCallback() {
+    this.addEventListener("click", this.download);
   }
 
-  downloadButton.addEventListener("click", function () {
-    // TODO: Download zip file with all files in it...
-
+  // TODO: figure out how to zip this into a single file
+  download() {
     // Download HTML
     let htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
     let htmlBlob = new Blob([htmlContent], { type: "text/html" });
@@ -28,7 +25,7 @@ export function initDownloadButton() {
         let jsBlob = new Blob([js], { type: "text/javascript" });
         downloadBlob(jsBlob, "main.js");
       });
-  });
+  }
 }
 
 function downloadBlob(blob: Blob, filename: string) {

@@ -34,10 +34,6 @@ export class CopyToClipboard extends HTMLElement {
     </button>
   `;
 
-  constructor() {
-    super();
-  }
-
   connectedCallback() {
     this.addEventListener("click", this.copyToClipboard);
   }

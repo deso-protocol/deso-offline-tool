@@ -28,21 +28,25 @@
         </div>
 
         <div class="ml-10 flex items-baseline space-x-4">
-          <button data-tab="generate-txn-tab" class="nav-button">
+          <button is="nav-button" to="generate-txn-tab" class="nav-button">
             Generate Txn
           </button>
-          <button data-tab="sign-txn-tab" class="nav-button">Sign</button>
-          <button data-tab="broadcast-txn-tab" class="nav-button">
+          <button is="nav-button" to="sign-txn-tab" class="nav-button">
+            Sign
+          </button>
+          <button is="nav-button" to="broadcast-txn-tab" class="nav-button">
             Broadcast
           </button>
-          <button data-tab="verify-txn-tab" class="nav-button">Verify</button>
+          <button is="nav-button" to="verify-txn-tab" class="nav-button">
+            Verify
+          </button>
         </div>
 
         <div class="ml-auto flex items-center">
           <button
-            id="download-button"
+            is="download-button"
             class="nav-button"
-            aria-label="Download html"
+            aria-label="Download page"
           >
             <svg-icon icon="download"></svg-icon>
           </button>
@@ -54,20 +58,7 @@
             <svg-icon icon="github"></svg-icon>
           </a>
           <div class="ml-3">
-            <span
-              id="networkOnlineIndicator"
-              class="flex flex-col items-center"
-            >
-              <svg-icon icon="wifi" class="text-green-500"></svg-icon>
-              <span class="text-gray-300 text-xs">online</span>
-            </span>
-            <span
-              id="networkOfflineIndicator"
-              class="flex flex-col items-center hidden"
-            >
-              <svg-icon icon="wifi-off" class="text-orange-500"></svg-icon>
-              <span class="text-gray-300 text-xs">offline</span>
-            </span>
+            <network-status-indicator></network-status-indicator>
           </div>
         </div>
       </nav>
@@ -79,52 +70,7 @@
             <p>Online</p>
           </header>
           <div class="mb-4 py-4 text-secondary"></div>
-          <form id="send-deso-txn-form" class="w-1/2">
-            <section class="form-controls">
-              <header>
-                <h3>Transfer DeSo</h3>
-              </header>
-              <input-group
-                inputId="senderPublicKey"
-                labelText="Transactor Public Key"
-              ></input-group>
-              <input-group
-                inputId="recipientPublicKey"
-                labelText="Recipient Public Key"
-              ></input-group>
-              <input-group
-                inputId="desoAmount"
-                inputType="number"
-                labelText="$DESO Amount"
-              ></input-group>
-            </section>
-            <div>
-              <button type="submit" class="primary-button">Generate</button>
-            </div>
-          </form>
-          <section id="transactionHexSection" class="hidden">
-            <header>
-              <h4>Transaction Hex</h4>
-            </header>
-            <p class="secondary-text">
-              You can enter this on the
-              <button
-                class="inline-button"
-                onclick="document.querySelector(`[data-tab='sign-txn-tab']`)?.click();"
-              >
-                Sign Tab
-              </button>
-              to sign it.
-            </p>
-            <div class="flex items-start mt-2">
-              <div
-                class="w-3/4 rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 p-1.5"
-              >
-                <span id="transactionHexContainer" class="break-words"></span>
-              </div>
-              <copy-to-clipboard id="copyTxnHexButton"></copy-to-clipboard>
-            </div>
-          </section>
+          <transfer-deso-form class="w-1/2"></transfer-deso-form>
         </section>
 
         <section id="sign-txn-tab" class="tab hidden">
@@ -137,16 +83,14 @@
               Enter your seed to sign transactions or arbitrary messages. You
               can broadcast transactions on the
               <button
+                is="nav-button"
+                to="broadcast-txn-tab"
                 class="inline-button"
-                onclick="document.querySelector(`[data-tab='broadcast-txn-tab']`)?.click();"
               >
                 Broadcast Tab
               </button>
               or verify signatures on the
-              <button
-                class="inline-button"
-                onclick="document.querySelector(`[data-tab='verify-txn-tab']`)?.click();"
-              >
+              <button is="nav-button" class="inline-button" to="verify-txn-tab">
                 Verify Tab</button
               >.
             </p>

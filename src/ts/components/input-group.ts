@@ -49,8 +49,4 @@ export class InputGroup extends HTMLElement {
       </div>
     `;
   })();
-
-  constructor() {
-    super();
-  }
 }

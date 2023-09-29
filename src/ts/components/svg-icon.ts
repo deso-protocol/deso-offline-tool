@@ -135,8 +135,4 @@ export class SVGIcon extends HTMLElement {
         throw new Error(`Unknown icon: ${icon}`);
     }
   })();
-
-  constructor() {
-    super();
-  }
 }
