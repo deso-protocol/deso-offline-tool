@@ -10,7 +10,7 @@ interface TransferDeSoFormControls extends HTMLFormControlsCollection {
 
 export class TransferDeSoForm extends HTMLElement {
   innerHTML = html`
-    <form class="w-1/2">
+    <form>
       <section class="form-controls">
         <header>
           <h3>Transfer DeSo</h3>

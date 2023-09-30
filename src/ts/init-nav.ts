@@ -20,6 +20,14 @@ export function initNav() {
   activeTab.classList.remove("hidden");
   activeButton.classList.add("nav-button--active");
 
+  window.history.replaceState(
+    {
+      tabId: INITIAL_TAB_ID,
+    },
+    "",
+    `#${INITIAL_TAB_ID}`,
+  );
+
   window.addEventListener("beforeunload", function () {
     const activeNavButton = document.querySelector(
       ".nav-button--active",
@@ -27,6 +35,17 @@ export function initNav() {
 
     if (activeNavButton?.to) {
       window.localStorage?.setItem("initialTabId", activeNavButton.to);
+    }
+  });
+
+  window.addEventListener("popstate", function (event) {
+    if (event.state.tabId) {
+      const navButton = document.querySelector(
+        `[to='${event.state.tabId}']`,
+      ) as NavButton | null;
+      navButton?.click();
+    } else {
+      throw new Error("Missing tabId in popstate event state");
     }
   });
 }

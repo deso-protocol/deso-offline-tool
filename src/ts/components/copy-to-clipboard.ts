@@ -16,14 +16,6 @@ export class CopyToClipboard extends HTMLElement {
     return ["text"];
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    switch (name) {
-      case "text":
-        this._text = newValue;
-        break;
-    }
-  }
-
   innerHTML = html`
     <button
       aria-label="Copy to clipboard"

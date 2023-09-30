@@ -65,6 +65,14 @@ export class NavButton extends HTMLButtonElement {
 
       newActiveTab.classList.remove("hidden");
       newActiveTabButton.classList.add("nav-button--active");
+
+      window.history.pushState(
+        {
+          tabId: newActiveTabId,
+        },
+        "",
+        `#${newActiveTabId}`,
+      );
     });
   }
 }
