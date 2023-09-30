@@ -38,7 +38,7 @@ export class InputGroup extends HTMLElement {
         <label for="${id}" class="block text-sm font-medium">${label}</label>
         ${hintTextHtml}
         <input
-          class="block w-full mt-2 rounded-md border-0 p-1.5 bg-white/5 text-white text-sm shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+          class="form-input"
           type="${type}"
           id="${id}"
           value="${value}"

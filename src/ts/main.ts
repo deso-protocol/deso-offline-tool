@@ -1,3 +1,4 @@
+import { AutoResizingTextarea } from "./components/auto-resizing-textarea";
 import { CopyToClipboard } from "./components/copy-to-clipboard";
 import { DeSoLogo } from "./components/deso-logo";
 import { DownloadButton } from "./components/download-button";
@@ -9,20 +10,22 @@ import { SVGIcon } from "./components/svg-icon";
 import { TransferDeSoForm } from "./components/transfer-deso-form";
 import { initNav } from "./init-nav";
 
-window.customElements.define("copy-to-clipboard", CopyToClipboard);
-window.customElements.define("input-group", InputGroup);
-window.customElements.define("svg-icon", SVGIcon);
-window.customElements.define("deso-logo", DeSoLogo);
-window.customElements.define(
-  "network-status-indicator",
-  NetworkStatusIndicator,
-);
-window.customElements.define("download-button", DownloadButton, {
+const define = window.customElements.define.bind(window.customElements);
+
+define("copy-to-clipboard", CopyToClipboard);
+define("input-group", InputGroup);
+define("svg-icon", SVGIcon);
+define("deso-logo", DeSoLogo);
+define("network-status-indicator", NetworkStatusIndicator);
+define("download-button", DownloadButton, {
   extends: "button",
 });
-window.customElements.define("nav-button", NavButton, { extends: "button" });
-window.customElements.define("transfer-deso-form", TransferDeSoForm);
-window.customElements.define("enter-seed-form", EnterSeedForm);
+define("nav-button", NavButton, { extends: "button" });
+define("transfer-deso-form", TransferDeSoForm);
+define("enter-seed-form", EnterSeedForm);
+define("auto-resizing-textarea", AutoResizingTextarea, {
+  extends: "textarea",
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   initNav();

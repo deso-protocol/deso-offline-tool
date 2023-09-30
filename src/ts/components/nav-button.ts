@@ -75,4 +75,11 @@ export class NavButton extends HTMLButtonElement {
       );
     });
   }
+
+  constructor() {
+    super();
+    // If a nav button is embedded within a form, this prevents it from submitting the form inadvertently.
+    // javascript doesn't have an override keyword, so we have to do it in the constructor.
+    this.type = "button";
+  }
 }

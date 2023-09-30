@@ -55,6 +55,11 @@ export class TransferDeSoForm extends HTMLElement {
     </section>
   `;
 
+  constructor() {
+    super();
+    this.style.display = "block";
+  }
+
   connectedCallback() {
     const sendDesoTxnForm = this.querySelector("form");
     const copyTxnHexButton = this.querySelector(

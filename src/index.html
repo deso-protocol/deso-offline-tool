@@ -100,66 +100,6 @@
             </p>
           </div>
           <enter-seed-form></enter-seed-form>
-          <!-- <form id="enterSeedForm" class="w-1/2">
-            <section class="form-controls">
-              <header class="mb-3">
-                <h3>Enter Your DeSo Seed</h3>
-              </header>
-              <input-group
-                labelText="DeSo Seed Phrase"
-                inputId="mnemonic"
-                inputPlaceholder="easily burden captain garment hidden gun economy road inner dance whisper buzz"
-              ></input-group>
-              <input-group
-                labelText="Account Number"
-                inputId="accountNumber"
-                inputValue="0"
-              ></input-group>
-              <input-group
-                labelText="Passphrase (optional)"
-                inputId="passphrase"
-              ></input-group>
-              <input-group
-                labelText="Seed Hex"
-                inputId="seedHex"
-                hintText="Only enter this if you do not have a seed phrase."
-              ></input-group>
-            </section>
-            <div>
-              <button type="submit" class="primary-button">Next</button>
-            </div>
-          </form>
-          <section id="publicKeyBase58Section" class="hidden">
-            <header>
-              <h4>Public Key</h4>
-            </header>
-            <p class="secondary-text">
-              Please confirm that this is the public key you expect to see.
-            </p>
-            <div
-              class="mt-2 w-1/2 rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 p-1.5"
-            >
-              <span id="publicKeyBase58Container" class="break-words"></span>
-            </div>
-          </section> -->
-
-          <form id="signTxForm" class="w-1/2 hidden mt-10">
-            <section class="form-controls">
-              <header class="mb-3">
-                <h3>Sign Transaction</h3>
-              </header>
-              <div class="input-group">
-                <label for="transactionHex">Txn Hex</label>
-                <p class="secondary-text">
-                  The hex of the transaction you want to sign.
-                </p>
-                <textarea type="text" id="transactionHexToSign "></textarea>
-              </div>
-            </section>
-            <div>
-              <button type="submit" class="primary-button">Sign</button>
-            </div>
-          </form>
         </section>
 
         <section id="broadcast-txn-tab" class="tab hidden">
