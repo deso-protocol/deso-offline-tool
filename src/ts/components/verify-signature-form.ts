@@ -3,9 +3,9 @@ import { bs58PublicKeyToBytes } from "deso-protocol";
 import { html, plainTextToHashHex } from "../utils";
 
 interface VerifySignatureFormControls extends HTMLFormControlsCollection {
-  msgToVerify: HTMLInputElement;
-  publicKey: HTMLInputElement;
-  msgSignature: HTMLInputElement;
+  msgToVerify: HTMLTextAreaElement;
+  signingPublicKey: HTMLInputElement;
+  msgSignature: HTMLTextAreaElement;
 }
 
 export class VerifySignatureForm extends HTMLElement {
@@ -18,7 +18,7 @@ export class VerifySignatureForm extends HTMLElement {
           isTextArea="true"
         ></input-group>
         <input-group
-          inputId="publicKey"
+          inputId="signingPublicKey"
           labelText="Public Key"
           hintText="The public key of the key pair that signed the message."
         ></input-group>
@@ -43,6 +43,7 @@ export class VerifySignatureForm extends HTMLElement {
   `;
 
   connectedCallback() {
+    this.rehydratePage();
     const form = this.querySelector("form");
     const verifyResultSuccessEl = this.querySelector("#verifyResultSuccess");
     const verifyResultErrorEl = this.querySelector("#verifyResultError");
@@ -64,17 +65,19 @@ export class VerifySignatureForm extends HTMLElement {
     }
 
     form.addEventListener("input", () => {
-      // clear the result messages any time the from changes.
+      // clear the result messages any time the form changes.
       verifyResultSuccessEl?.classList.add("hidden");
       verifyResultErrorEl?.classList.add("hidden");
     });
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
+
+      // TODO: form validation
       const formControls = (form as HTMLFormElement)
         .elements as VerifySignatureFormControls;
       const msgText = formControls.msgToVerify.value;
-      const publicKey = formControls.publicKey.value;
+      const publicKey = formControls.signingPublicKey.value;
       const msgSignature = formControls.msgSignature.value;
       const messageHashHex = plainTextToHashHex(msgText);
       const publicKeyBytes = bs58PublicKeyToBytes(publicKey);
@@ -91,5 +94,54 @@ export class VerifySignatureForm extends HTMLElement {
         verifyResultSuccessEl?.classList.add("hidden");
       }
     });
+
+    window.addEventListener("beforeunload", () => {
+      const msgToVerifyInput = this.querySelector(
+        "#msgToVerify",
+      ) as HTMLTextAreaElement | null;
+      const signingPublicKeyInput = this.querySelector(
+        "#signingPublicKey",
+      ) as HTMLInputElement | null;
+      const msgSignatureInput = this.querySelector(
+        "#msgSignature",
+      ) as HTMLInputElement | null;
+
+      window.localStorage?.setItem(
+        "verifyFormState",
+        JSON.stringify({
+          msgToVerify: msgToVerifyInput?.value ?? "",
+          signingPublicKey: signingPublicKeyInput?.value ?? "",
+          msgSignature: msgSignatureInput?.value ?? "",
+        }),
+      );
+    });
+  }
+
+  rehydratePage() {
+    const verifyFormStateJSON = window.localStorage?.getItem("verifyFormState");
+    if (verifyFormStateJSON) {
+      const { msgToVerify, signingPublicKey, msgSignature } =
+        JSON.parse(verifyFormStateJSON);
+
+      const msgToVerifyInput = this.querySelector(
+        "#msgToVerify",
+      ) as HTMLTextAreaElement | null;
+      const signingPublicKeyInput = this.querySelector(
+        "#signingPublicKey",
+      ) as HTMLInputElement | null;
+      const msgSignatureInput = this.querySelector(
+        "#msgSignature",
+      ) as HTMLInputElement | null;
+
+      if (msgToVerifyInput) {
+        msgToVerifyInput.value = msgToVerify;
+      }
+      if (signingPublicKeyInput) {
+        signingPublicKeyInput.value = signingPublicKey;
+      }
+      if (msgSignatureInput) {
+        msgSignatureInput.value = msgSignature;
+      }
+    }
   }
 }
