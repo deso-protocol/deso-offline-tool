@@ -1,4 +1,4 @@
-import { escape, html } from "../utils";
+import { escapeHTML, html } from "../utils";
 
 export class InputGroup extends HTMLElement {
   static get observedAttributes() {
@@ -9,23 +9,27 @@ export class InputGroup extends HTMLElement {
       "inputValue",
       "inputId",
       "hintText",
+      "isTextArea",
     ];
   }
 
   innerHTML = (() => {
-    const label = escape(this.getAttribute("labelText") || "");
-    const id = escape(this.getAttribute("inputId") || "");
-    const type = escape(this.getAttribute("inputType") || "text");
-    const placeholder = escape(this.getAttribute("inputPlaceholder") || "");
-    const value = escape(this.getAttribute("inputValue") || "");
-    const hintText = escape(this.getAttribute("hintText") || "");
+    const labelText = escapeHTML(this.getAttribute("labelText") || "");
+    const inputId = escapeHTML(this.getAttribute("inputId") || "");
+    const inputType = escapeHTML(this.getAttribute("inputType") || "text");
+    const inputPlaceHolder = escapeHTML(
+      this.getAttribute("inputPlaceholder") || "",
+    );
+    const inputValue = escapeHTML(this.getAttribute("inputValue") || "");
+    const hintText = escapeHTML(this.getAttribute("hintText") || "");
+    const isTextArea = this.getAttribute("isTextArea") === "true";
 
-    if (!id) {
-      throw new Error("Input group must have an id");
+    if (!inputId) {
+      throw new Error("An input group must have an inputId attribute.");
     }
 
-    if (!label) {
-      throw new Error("Input group must have a label");
+    if (!labelText) {
+      throw new Error("An input group must have a labelText attribute.");
     }
 
     const hintTextHtml =
@@ -33,19 +37,35 @@ export class InputGroup extends HTMLElement {
         ? html`<p class="secondary-text">${hintText}</p>`
         : "";
 
+    const formControl = isTextArea
+      ? html`
+          <textarea
+            is="auto-resizing-textarea"
+            id="${inputId}"
+            class="form-input"
+            value="${inputValue}"
+            placeholder="${inputPlaceHolder}"
+            spellcheck="false"
+            autocomplete="off"
+          ></textarea>
+        `
+      : html`
+          <input
+            class="form-input"
+            type="${inputType}"
+            id="${inputId}"
+            value="${inputValue}"
+            placeholder="${inputPlaceHolder}"
+            spellcheck="false"
+            autocomplete="off"
+          />
+        `;
     return html`
       <div>
-        <label for="${id}" class="block text-sm font-medium">${label}</label>
-        ${hintTextHtml}
-        <input
-          class="form-input"
-          type="${type}"
-          id="${id}"
-          value="${value}"
-          placeholder="${placeholder}"
-          spellcheck="false"
-          autocomplete="off"
-        />
+        <label for="${inputId}" class="block text-sm font-medium"
+          >${labelText}</label
+        >
+        ${hintTextHtml} ${formControl}
       </div>
     `;
   })();

@@ -39,7 +39,7 @@ export class TransferDeSoForm extends HTMLElement {
       </header>
       <p class="secondary-text">
         You can enter this on the
-        <button is="nav-button" class="inline-button" to="sign-txn-tab">
+        <button is="nav-button" class="inline-button" to="sign-tab">
           Sign Tab
         </button>
         to sign it.

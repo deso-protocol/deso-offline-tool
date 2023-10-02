@@ -1,7 +1,8 @@
+import { utils } from "@noble/secp256k1";
 import { HDKey } from "@scure/bip32";
 import { mnemonicToSeedSync } from "@scure/bip39";
-import { keygen, publicKeyToBase58Check, signTx } from "deso-protocol";
-import { html } from "../utils";
+import { keygen, publicKeyToBase58Check, sign, signTx } from "deso-protocol";
+import { html, plainTextToHashHex } from "../utils";
 import { CopyToClipboard } from "./copy-to-clipboard";
 
 interface EnterSeedFormControls extends HTMLFormControlsCollection {
@@ -22,13 +23,17 @@ interface SignTxFormControls extends HTMLFormControlsCollection {
   txnHexToSign: HTMLTextAreaElement;
 }
 
-const formSelectors = {
+interface SignMsgFormControls extends HTMLFormControlsCollection {
+  msgToSign: HTMLTextAreaElement;
+}
+
+const selectors = {
   enterSeedForm: "#enterSeedForm",
   signTxForm: "#signTxForm",
   signMsgForm: "#signMsgForm",
 };
 
-export class EnterSeedForm extends HTMLElement {
+export class SignForm extends HTMLElement {
   innerHTML = html`
     <form id="enterSeedForm">
       <section class="form-controls">
@@ -88,17 +93,12 @@ export class EnterSeedForm extends HTMLElement {
             >.
           </p>
         </header>
-        <div>
-          <label for="transactionHex">Txn Hex</label>
-          <p class="secondary-text">
-            Enter the hex of the transaction you want to sign.
-          </p>
-          <textarea
-            is="auto-resizing-textarea"
-            id="txnHexToSign"
-            class="form-input"
-          ></textarea>
-        </div>
+        <input-group
+          inputId="txnHexToSign"
+          labelText="Transaction Hex"
+          hintText="Enter the hex of the transaction you want to sign."
+          isTextArea="true"
+        ></input-group>
       </section>
       <div>
         <button type="submit" class="primary-button">Sign</button>
@@ -131,25 +131,32 @@ export class EnterSeedForm extends HTMLElement {
             >.
           </p>
         </header>
-        <div>
-          <label for="transactionHex">Message Text</label>
-          <p class="secondary-text">
-            You can sign an arbitrary message with your key. Other users can
-            verify that the message was signed by you using the
-            <button is="nav-button" class="inline-button" to="verify-txn-tab">
-              Verify Tab</button
-            >.
-          </p>
-          <textarea
-            is="auto-resizing-textarea"
-            type="text"
-            id="transactionHexToSign "
-            class="form-input"
-          ></textarea>
-        </div>
+        <input-group
+          inputId="msgToSign"
+          labelText="Message Text"
+          isTextArea="true"
+        ></input-group>
       </section>
       <div>
         <button type="submit" class="primary-button">Sign</button>
+      </div>
+      <div id="signedMsgSignatureContainer" class="mt-10 hidden">
+        <p>Message Signature</p>
+        <p class="secondary-text">
+          Other users can verify that this message was signed by you using the
+          <button is="nav-button" to="verify-txn-tab" class="inline-button">
+            Verify Tab
+          </button>
+          when online.
+        </p>
+        <div class="flex items-end w-3/4">
+          <div class="form-input">
+            <span id="signedMsgSignature" class="break-words"></span>
+          </div>
+          <copy-to-clipboard
+            id="copySignedMsgSignatureButton"
+          ></copy-to-clipboard>
+        </div>
       </div>
     </form>
   `;
@@ -162,26 +169,20 @@ export class EnterSeedForm extends HTMLElement {
   }
 
   connectedCallback() {
-    const enterSeedForm = this.querySelector(formSelectors.enterSeedForm);
-    const signTxForm = this.querySelector(formSelectors.signTxForm);
-    const signMsgForm = this.querySelector(formSelectors.signMsgForm);
+    const enterSeedForm = this.querySelector(selectors.enterSeedForm);
+    const signTxForm = this.querySelector(selectors.signTxForm);
+    const signMsgForm = this.querySelector(selectors.signMsgForm);
 
     if (!enterSeedForm) {
-      throw new Error(
-        `No form found for selector: ${formSelectors.enterSeedForm}`,
-      );
+      throw new Error(`No form found for selector: ${selectors.enterSeedForm}`);
     }
 
     if (!signTxForm) {
-      throw new Error(
-        `No form found for selector: ${formSelectors.signTxForm}`,
-      );
+      throw new Error(`No form found for selector: ${selectors.signTxForm}`);
     }
 
     if (!signMsgForm) {
-      throw new Error(
-        `No form found for selector: ${formSelectors.signMsgForm}`,
-      );
+      throw new Error(`No form found for selector: ${selectors.signMsgForm}`);
     }
 
     this.rehydratePage();
@@ -259,6 +260,49 @@ export class EnterSeedForm extends HTMLElement {
       copySignedTxnHexButton.text = signedTxnHex;
 
       this.querySelector("#signedTxHexContainer")?.classList.remove("hidden");
+    });
+
+    signMsgForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const form = event.target as HTMLFormElement;
+      const message = (form.elements as SignMsgFormControls).msgToSign.value;
+
+      if (!message) {
+        throw new Error("No message provided.");
+      }
+
+      if (this.privateKeyHex.length === 0) {
+        throw new Error("No private key set.");
+      }
+
+      const keys = keygen(this.privateKeyHex);
+      const messageHashHex = plainTextToHashHex(message);
+      console.log(messageHashHex);
+      const [signatureBytes] = await sign(messageHashHex, keys.private);
+      const signatureHex = utils.bytesToHex(signatureBytes);
+      const signedMsgEl = this.querySelector("#signedMsgSignature");
+      const copySignedMsgButton = this.querySelector(
+        "#copySignedMsgSignatureButton",
+      ) as CopyToClipboard | null;
+
+      if (!signedMsgEl) {
+        throw new Error(
+          "No signature element found for selector: #signedMsgSignature",
+        );
+      }
+
+      if (!copySignedMsgButton) {
+        throw new Error(
+          "No copy signature button found for selector: #copySignedMsgSignatureButton",
+        );
+      }
+
+      signedMsgEl.textContent = signatureHex;
+      copySignedMsgButton.text = signatureHex;
+
+      this.querySelector("#signedMsgSignatureContainer")?.classList.remove(
+        "hidden",
+      );
     });
 
     window.addEventListener("beforeunload", () => {

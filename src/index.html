@@ -31,9 +31,7 @@
           <button is="nav-button" to="generate-txn-tab" class="nav-button">
             Generate Txn
           </button>
-          <button is="nav-button" to="sign-txn-tab" class="nav-button">
-            Sign
-          </button>
+          <button is="nav-button" to="sign-tab" class="nav-button">Sign</button>
           <button is="nav-button" to="broadcast-txn-tab" class="nav-button">
             Broadcast
           </button>
@@ -73,7 +71,7 @@
           <transfer-deso-form class="w-1/2"></transfer-deso-form>
         </section>
 
-        <section id="sign-txn-tab" class="tab hidden">
+        <section id="sign-tab" class="tab hidden">
           <header>
             <h2 class="tab__title">Sign Transactions or Messages</h2>
             <p>Offline</p>
@@ -99,13 +97,28 @@
               run it on an air-gapped machine for secure transaction signing.
             </p>
           </div>
-          <enter-seed-form></enter-seed-form>
+          <sign-form></sign-form>
         </section>
 
         <section id="broadcast-txn-tab" class="tab hidden">
           Broadcast Txn
         </section>
-        <section id="verify-txn-tab" class="tab hidden">Verify Txn</section>
+        <section id="verify-txn-tab" class="tab hidden">
+          <header>
+            <h2 class="tab__title">Verify Signature</h2>
+            <p>Offline</p>
+          </header>
+          <div class="py-4 secondary-text mb-4">
+            <p>
+              Use this tab to verify signatures on arbitrary messages that were
+              generated on the
+              <button is="nav-button" class="inline-button" to="sign-tab">
+                Sign Tab</button
+              >.
+            </p>
+          </div>
+          <verify-signature-form></verify-signature-form>
+        </section>
       </div>
     </div>
     <script src="main.js"></script>

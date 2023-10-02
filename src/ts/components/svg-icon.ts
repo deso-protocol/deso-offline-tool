@@ -118,7 +118,6 @@ export class SVGIcon extends HTMLElement {
             fill="none"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="text-orange-500"
           >
             <line x1="1" y1="1" x2="23" y2="23"></line>
             <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
@@ -127,6 +126,43 @@ export class SVGIcon extends HTMLElement {
             <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
             <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
             <line x1="12" y1="20" x2="12.01" y2="20"></line>
+          </svg>
+        `;
+      }
+
+      case "x-circle": {
+        return html`
+          <svg
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+          </svg>
+        `;
+      }
+
+      case "check-circle": {
+        return html`
+          <svg
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
           </svg>
         `;
       }

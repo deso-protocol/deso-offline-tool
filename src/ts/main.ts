@@ -2,12 +2,13 @@ import { AutoResizingTextarea } from "./components/auto-resizing-textarea";
 import { CopyToClipboard } from "./components/copy-to-clipboard";
 import { DeSoLogo } from "./components/deso-logo";
 import { DownloadButton } from "./components/download-button";
-import { EnterSeedForm } from "./components/enter-seed-form";
 import { InputGroup } from "./components/input-group";
 import { NavButton } from "./components/nav-button";
 import { NetworkStatusIndicator } from "./components/network-status-indicator";
+import { SignForm } from "./components/sign-form";
 import { SVGIcon } from "./components/svg-icon";
 import { TransferDeSoForm } from "./components/transfer-deso-form";
+import { VerifySignatureForm } from "./components/verify-signature-form";
 import { initNav } from "./init-nav";
 
 const define = window.customElements.define.bind(window.customElements);
@@ -22,10 +23,11 @@ define("download-button", DownloadButton, {
 });
 define("nav-button", NavButton, { extends: "button" });
 define("transfer-deso-form", TransferDeSoForm);
-define("enter-seed-form", EnterSeedForm);
+define("sign-form", SignForm);
 define("auto-resizing-textarea", AutoResizingTextarea, {
   extends: "textarea",
 });
+define("verify-signature-form", VerifySignatureForm);
 
 document.addEventListener("DOMContentLoaded", function () {
   initNav();
