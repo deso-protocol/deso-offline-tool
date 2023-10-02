@@ -35,7 +35,7 @@
           <button is="nav-button" to="broadcast-txn-tab" class="nav-button">
             Broadcast
           </button>
-          <button is="nav-button" to="verify-txn-tab" class="nav-button">
+          <button is="nav-button" to="verify-signature-tab" class="nav-button">
             Verify
           </button>
         </div>
@@ -88,7 +88,11 @@
                 Broadcast Tab
               </button>
               or verify signatures on the
-              <button is="nav-button" class="inline-button" to="verify-txn-tab">
+              <button
+                is="nav-button"
+                class="inline-button"
+                to="verify-signature-tab"
+              >
                 Verify Tab</button
               >.
             </p>
@@ -101,9 +105,25 @@
         </section>
 
         <section id="broadcast-txn-tab" class="tab hidden">
-          Broadcast Txn
+          <header>
+            <h2 class="tab__title">Broadcast Transaction</h2>
+            <p>Online</p>
+          </header>
+          <div class="py-4 secondary-text mb-4">
+            <p>
+              Broadcast a transaction that was generated on the
+              <button
+                is="nav-button"
+                class="inline-button"
+                to="generate-txn-tab"
+              >
+                Generate Txn Tab</button
+              >.
+            </p>
+          </div>
+          <broadcast-form></broadcast-form>
         </section>
-        <section id="verify-txn-tab" class="tab hidden">
+        <section id="verify-signature-tab" class="tab hidden">
           <header>
             <h2 class="tab__title">Verify Signature</h2>
             <p>Offline</p>

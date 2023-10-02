@@ -28,10 +28,8 @@ export class VerifySignatureForm extends HTMLElement {
           isTextArea="true"
         ></input-group>
       </section>
-      <div>
-        <button type="submit" class="primary-button">Verify</button>
-      </div>
-      <div class="mt-3 h-10">
+      <div class="flex items-center">
+        <button type="submit" class="primary-button mr-3">Verify</button>
         <p id="verifyResultSuccess" class="text-green-400 hidden">
           <svg-icon icon="check-circle"></svg-icon> The signature is valid.
         </p>

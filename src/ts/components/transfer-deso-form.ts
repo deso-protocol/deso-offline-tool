@@ -61,6 +61,7 @@ export class TransferDeSoForm extends HTMLElement {
   }
 
   connectedCallback() {
+    this.rehydratePage();
     const sendDesoTxnForm = this.querySelector("form");
     const copyTxnHexButton = this.querySelector(
       "#copyTxnHexButton",
@@ -129,5 +130,57 @@ export class TransferDeSoForm extends HTMLElement {
 
       copyTxnHexButton.text = txHex;
     });
+
+    window.addEventListener("beforeunload", () => {
+      const senderPublicKeyInput = this.querySelector(
+        "#senderPublicKey",
+      ) as HTMLInputElement | null;
+      const recipientPublicKeyInput = this.querySelector(
+        "#recipientPublicKey",
+      ) as HTMLInputElement | null;
+      const desoAmountInput = this.querySelector(
+        "#desoAmount",
+      ) as HTMLInputElement | null;
+
+      window.localStorage?.setItem(
+        "transferDeSoFormState",
+        JSON.stringify({
+          senderPublicKey: senderPublicKeyInput?.value ?? "",
+          recipientPublicKey: recipientPublicKeyInput?.value ?? "",
+          desoAmount: desoAmountInput?.value ?? "",
+        }),
+      );
+    });
+  }
+
+  rehydratePage() {
+    const transferDeSoFormStateJSON = window.localStorage?.getItem(
+      "transferDeSoFormState",
+    );
+    if (transferDeSoFormStateJSON) {
+      const { senderPublicKey, recipientPublicKey, desoAmount } = JSON.parse(
+        transferDeSoFormStateJSON,
+      );
+
+      const senderPublicKeyInput = this.querySelector(
+        "#senderPublicKey",
+      ) as HTMLInputElement | null;
+      const recipientPublicKeyInput = this.querySelector(
+        "#recipientPublicKey",
+      ) as HTMLInputElement | null;
+      const desoAmountInput = this.querySelector(
+        "#desoAmount",
+      ) as HTMLInputElement | null;
+
+      if (senderPublicKeyInput) {
+        senderPublicKeyInput.value = senderPublicKey;
+      }
+      if (recipientPublicKeyInput) {
+        recipientPublicKeyInput.value = recipientPublicKey;
+      }
+      if (desoAmountInput) {
+        desoAmountInput.value = desoAmount;
+      }
+    }
   }
 }

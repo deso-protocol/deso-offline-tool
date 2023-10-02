@@ -126,7 +126,11 @@ export class SignForm extends HTMLElement {
           <h3>Sign Message</h3>
           <p class="secondary-text">
             Sign an arbitrary message that anyone can verify on the
-            <button is="nav-button" class="inline-button" to="verify-txn-tab">
+            <button
+              is="nav-button"
+              class="inline-button"
+              to="verify-signature-tab"
+            >
               Verify Tab</button
             >.
           </p>
@@ -144,7 +148,11 @@ export class SignForm extends HTMLElement {
         <p>Message Signature</p>
         <p class="secondary-text">
           Other users can verify that this message was signed by you using the
-          <button is="nav-button" to="verify-txn-tab" class="inline-button">
+          <button
+            is="nav-button"
+            to="verify-signature-tab"
+            class="inline-button"
+          >
             Verify Tab
           </button>
           when online.

@@ -1,4 +1,5 @@
 import { AutoResizingTextarea } from "./components/auto-resizing-textarea";
+import { BroadcastForm } from "./components/broadcast-form";
 import { CopyToClipboard } from "./components/copy-to-clipboard";
 import { DeSoLogo } from "./components/deso-logo";
 import { DownloadButton } from "./components/download-button";
@@ -28,6 +29,7 @@ define("auto-resizing-textarea", AutoResizingTextarea, {
   extends: "textarea",
 });
 define("verify-signature-form", VerifySignatureForm);
+define("broadcast-form", BroadcastForm);
 
 document.addEventListener("DOMContentLoaded", function () {
   initNav();
