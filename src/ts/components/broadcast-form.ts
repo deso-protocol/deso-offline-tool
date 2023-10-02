@@ -26,6 +26,11 @@ export class BroadcastForm extends HTMLElement {
     </form>
   `;
 
+  constructor() {
+    super();
+    this.style.display = "block";
+  }
+
   connectedCallback() {
     const form = this.querySelector("form");
 

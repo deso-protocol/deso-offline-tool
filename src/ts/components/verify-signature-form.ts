@@ -40,6 +40,11 @@ export class VerifySignatureForm extends HTMLElement {
     </form>
   `;
 
+  constructor() {
+    super();
+    this.style.display = "block";
+  }
+
   connectedCallback() {
     this.rehydratePage();
     const form = this.querySelector("form");
