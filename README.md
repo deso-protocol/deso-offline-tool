@@ -15,6 +15,12 @@ There are a few different ways to download the web app:
 Once you have the files downloaded, you can run the app by extracting `deso-standalone-app.zip` and
 opening `dist/index.html`.
 
+### Build from source
+
+- Clone this repo
+- Run `npm run build`
+- Run `open dist/index.html`
+
 ### Development
 
 - Clone this repo
