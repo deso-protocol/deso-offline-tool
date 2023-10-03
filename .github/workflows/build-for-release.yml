@@ -25,7 +25,7 @@ jobs:
       run: npm run build
 
     - name: Archive Production Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: deso-standalone-app.zip
         path: dist/deso-standalone-app.zip
