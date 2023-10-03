@@ -51,4 +51,8 @@ function updateActiveTab() {
 
   newNavButton.classList.add("active");
   newTab.classList.remove("hidden");
+
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+  }, 1);
 }
