@@ -27,5 +27,5 @@ jobs:
     - name: Archive Production Artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: deso-standalone-app.zip
+        name: deso-standalone-app
         path: dist/deso-standalone-app.zip
