@@ -4,7 +4,6 @@ import { CopyToClipboard } from "./components/copy-to-clipboard";
 import { DeSoLogo } from "./components/deso-logo";
 import { DownloadButton } from "./components/download-button";
 import { InputGroup } from "./components/input-group";
-import { NavButton } from "./components/nav-button";
 import { NetworkStatusIndicator } from "./components/network-status-indicator";
 import { SignForm } from "./components/sign-form";
 import { SVGIcon } from "./components/svg-icon";
@@ -22,7 +21,6 @@ define("network-status-indicator", NetworkStatusIndicator);
 define("download-button", DownloadButton, {
   extends: "button",
 });
-define("nav-button", NavButton, { extends: "button" });
 define("transfer-deso-form", TransferDeSoForm);
 define("sign-form", SignForm);
 define("auto-resizing-textarea", AutoResizingTextarea, {

@@ -28,16 +28,10 @@
         </div>
 
         <div class="ml-10 flex items-baseline space-x-4">
-          <button is="nav-button" to="generate-txn-tab" class="nav-button">
-            Generate Txn
-          </button>
-          <button is="nav-button" to="sign-tab" class="nav-button">Sign</button>
-          <button is="nav-button" to="broadcast-txn-tab" class="nav-button">
-            Broadcast
-          </button>
-          <button is="nav-button" to="verify-signature-tab" class="nav-button">
-            Verify
-          </button>
+          <a href="#generate" class="nav-button">Generate Txn</a>
+          <a href="#sign" class="nav-button">Sign</a>
+          <a href="#broadcast" class="nav-button"> Broadcast </a>
+          <a href="#verify" class="nav-button"> Verify </a>
         </div>
 
         <div class="ml-auto flex items-center">
@@ -62,7 +56,7 @@
       </nav>
 
       <div class="bg-gray-800 p-12">
-        <section id="generate-txn-tab" class="tab hidden">
+        <section id="generate" class="tab hidden">
           <header>
             <h2 class="tab__title">Generate Transaction</h2>
             <p>Online</p>
@@ -71,7 +65,7 @@
           <transfer-deso-form class="w-1/2"></transfer-deso-form>
         </section>
 
-        <section id="sign-tab" class="tab hidden">
+        <section id="sign" class="tab hidden">
           <header>
             <h2 class="tab__title">Sign Transactions or Messages</h2>
             <p>Offline</p>
@@ -80,21 +74,9 @@
             <p class="mb-2">
               Enter your seed to sign transactions or arbitrary messages. You
               can broadcast transactions on the
-              <button
-                is="nav-button"
-                to="broadcast-txn-tab"
-                class="inline-button"
-              >
-                Broadcast Tab
-              </button>
+              <a href="#broadcast" class="inline-button"> Broadcast Tab </a>
               or verify signatures on the
-              <button
-                is="nav-button"
-                class="inline-button"
-                to="verify-signature-tab"
-              >
-                Verify Tab</button
-              >.
+              <a class="inline-button" href="#verify"> Verify Tab</a>.
             </p>
             <p>
               This tab can be used offline, so you can download this tool and
@@ -104,7 +86,7 @@
           <sign-form></sign-form>
         </section>
 
-        <section id="broadcast-txn-tab" class="tab hidden">
+        <section id="broadcast" class="tab hidden">
           <header>
             <h2 class="tab__title">Broadcast Transaction</h2>
             <p>Online</p>
@@ -112,18 +94,12 @@
           <div class="py-4 secondary-text mb-4">
             <p>
               Broadcast a transaction that was generated on the
-              <button
-                is="nav-button"
-                class="inline-button"
-                to="generate-txn-tab"
-              >
-                Generate Txn Tab</button
-              >.
+              <a class="inline-button" href="#generate"> Generate Txn Tab</a>.
             </p>
           </div>
           <broadcast-form></broadcast-form>
         </section>
-        <section id="verify-signature-tab" class="tab hidden">
+        <section id="verify" class="tab hidden">
           <header>
             <h2 class="tab__title">Verify Signature</h2>
             <p>Offline</p>
@@ -132,9 +108,7 @@
             <p>
               Use this tab to verify signatures on arbitrary messages that were
               generated on the
-              <button is="nav-button" class="inline-button" to="sign-tab">
-                Sign Tab</button
-              >.
+              <a class="inline-button" href="#sign"> Sign Tab</a>.
             </p>
           </div>
           <verify-signature-form></verify-signature-form>

@@ -44,9 +44,7 @@ export class TransferDeSoForm extends BaseComponent {
       </header>
       <p class="secondary-text">
         You can enter this on the
-        <button is="nav-button" class="inline-button" to="sign-tab">
-          Sign Tab
-        </button>
+        <a class="inline-button" href="#sign">Sign Tab</a>
         to sign it.
       </p>
       <div class="flex items-start mt-2">

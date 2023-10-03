@@ -1,51 +1,54 @@
-import { NavButton } from "./components/nav-button";
-
-const INITIAL_TAB_ID =
-  window.localStorage?.getItem("initialTabId") ?? "generate-txn-tab";
-
 export function initNav() {
-  const activeTab = document.getElementById(INITIAL_TAB_ID);
-  const activeButton = document.querySelector(`[to='${INITIAL_TAB_ID}']`);
-
-  if (!activeTab) {
-    throw new Error(`No active tab found for selector: #${INITIAL_TAB_ID}`);
+  if (!window.location.hash) {
+    window.location.hash =
+      window.localStorage.getItem("lastHashLocation") ?? "#generate";
   }
 
-  if (!activeButton) {
-    throw new Error(
-      `No active button found for selector: [to='${INITIAL_TAB_ID}']`,
-    );
+  updateActiveTab();
+
+  window.addEventListener("hashchange", function (event) {
+    updateActiveTab();
+  });
+
+  window.addEventListener("beforeunload", () => {
+    window.localStorage.setItem("lastHashLocation", window.location.hash);
+  });
+}
+
+function updateActiveTab() {
+  const nav = document.querySelector("#main-nav");
+
+  if (!nav) {
+    throw new Error("No nav element found for selector: #main-nav");
   }
 
-  activeTab.classList.remove("hidden");
-  activeButton.classList.add("nav-button--active");
+  const activeNavButton = nav.querySelector(".active");
 
-  window.history.replaceState(
-    {
-      tabId: INITIAL_TAB_ID,
-    },
-    "",
-    `#${INITIAL_TAB_ID}`,
-  );
+  if (activeNavButton) {
+    activeNavButton.classList.remove("active");
+    const activeTabId = activeNavButton.getAttribute("href") ?? "";
+    const activeTab = document.querySelector(activeTabId);
 
-  window.addEventListener("beforeunload", function () {
-    const activeNavButton = document.querySelector(
-      ".nav-button--active",
-    ) as NavButton | null;
-
-    if (activeNavButton?.to) {
-      window.localStorage?.setItem("initialTabId", activeNavButton.to);
+    if (!activeTab) {
+      throw new Error(`No tab found with id: #${activeTabId}`);
     }
-  });
 
-  window.addEventListener("popstate", function (event) {
-    if (event.state.tabId) {
-      const navButton = document.querySelector(
-        `[to='${event.state.tabId}']`,
-      ) as NavButton | null;
-      navButton?.click();
-    } else {
-      throw new Error("Missing tabId in popstate event state");
-    }
-  });
+    activeTab.classList.add("hidden");
+  }
+
+  const newTabId = window.location.hash;
+  const newTab = document.querySelector(newTabId);
+
+  if (!newTab) {
+    throw new Error(`No tab found for selector: ${newTabId}`);
+  }
+
+  const newNavButton = nav.querySelector(`[href='${newTabId}']`);
+
+  if (!newNavButton) {
+    throw new Error(`No nav button found for selector: [href='${newTabId}']`);
+  }
+
+  newNavButton.classList.add("active");
+  newTab.classList.remove("hidden");
 }

@@ -85,13 +85,7 @@ export class SignForm extends BaseComponent {
             <h3>Sign Transaction</h3>
             <p class="secondary-text">
               Sign a transaction so you can broadcast it on the
-              <button
-                is="nav-button"
-                to="broadcast-txn-tab"
-                class="inline-button"
-              >
-                Broadcast Tab</button
-              >.
+              <a href="#broadcast" class="inline-button"> Broadcast Tab</a>.
             </p>
           </header>
           <input-group
@@ -108,13 +102,7 @@ export class SignForm extends BaseComponent {
           <p class="text-sm">Signed Txn Hex</p>
           <p class="secondary-text">
             Broadcast this via the
-            <button
-              is="nav-button"
-              to="broadcast-txn-tab"
-              class="inline-button"
-            >
-              Broadcast Tab
-            </button>
+            <a href="#broadcast" class="inline-button"> Broadcast Tab </a>
             when online.
           </p>
           <div class="flex items-end w-3/4 mt-2">
@@ -131,13 +119,7 @@ export class SignForm extends BaseComponent {
             <h3>Sign Message</h3>
             <p class="secondary-text">
               Sign an arbitrary message that anyone can verify on the
-              <button
-                is="nav-button"
-                class="inline-button"
-                to="verify-signature-tab"
-              >
-                Verify Tab</button
-              >.
+              <a class="inline-button" href="#verify"> Verify Tab</a>.
             </p>
           </header>
           <input-group
@@ -153,13 +135,7 @@ export class SignForm extends BaseComponent {
           <p class="text-sm">Message Signature</p>
           <p class="secondary-text">
             Other users can verify that this message was signed by you using the
-            <button
-              is="nav-button"
-              to="verify-signature-tab"
-              class="inline-button"
-            >
-              Verify Tab
-            </button>
+            <a href="#verify" class="inline-button"> Verify Tab </a>
             when online.
           </p>
           <div class="flex items-end mt-2 w-3/4">
