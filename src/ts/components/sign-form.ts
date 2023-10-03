@@ -72,9 +72,7 @@ export class SignForm extends HTMLElement {
       <p class="secondary-text">
         Please confirm that this is the public key you expect to see.
       </p>
-      <div
-        class="mt-2 w-1/2 rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 p-1.5"
-      >
+      <div class="mt-2 w-1/2 copy-text-container">
         <span id="publicKeyBase58Container" class="break-words"></span>
       </div>
     </section>
@@ -104,7 +102,7 @@ export class SignForm extends HTMLElement {
         <button type="submit" class="primary-button">Sign</button>
       </div>
       <div id="signedTxHexContainer" class="mt-10 hidden">
-        <p>Signed Txn Hex</p>
+        <p class="text-sm">Signed Txn Hex</p>
         <p class="secondary-text">
           Broadcast this via the
           <button is="nav-button" to="broadcast-txn-tab" class="inline-button">
@@ -112,8 +110,8 @@ export class SignForm extends HTMLElement {
           </button>
           when online.
         </p>
-        <div class="flex items-end w-3/4">
-          <div class="form-input">
+        <div class="flex items-end w-3/4 mt-2">
+          <div class="copy-text-container">
             <span id="signedTxHex" class="break-words"></span>
           </div>
           <copy-to-clipboard id="copySignedTxnHexButton"></copy-to-clipboard>
@@ -145,7 +143,7 @@ export class SignForm extends HTMLElement {
         <button type="submit" class="primary-button">Sign</button>
       </div>
       <div id="signedMsgSignatureContainer" class="mt-10 hidden">
-        <p>Message Signature</p>
+        <p class="text-sm">Message Signature</p>
         <p class="secondary-text">
           Other users can verify that this message was signed by you using the
           <button
@@ -157,8 +155,8 @@ export class SignForm extends HTMLElement {
           </button>
           when online.
         </p>
-        <div class="flex items-end w-3/4">
-          <div class="form-input">
+        <div class="flex items-end mt-2 w-3/4">
+          <div class="copy-text-container">
             <span id="signedMsgSignature" class="break-words"></span>
           </div>
           <copy-to-clipboard

@@ -66,7 +66,20 @@ export class InputGroup extends HTMLElement {
           >${labelText}</label
         >
         ${hintTextHtml} ${formControl}
+        <!-- NOTE: We are not using slots for the error bc it requires adopting
+        shadow dom which is much more difficult to work with. This achieves more
+        or less the same thing with none of the headache -->
+        <span class="text-red-400 text-sm" data-error-for=${inputId}></span>
       </div>
     `;
   })();
+
+  connectedCallback() {
+    if (this.getAttribute("required") === "true") {
+      this.querySelector("#" + this.getAttribute("inputId"))?.setAttribute(
+        "required",
+        "true",
+      );
+    }
+  }
 }

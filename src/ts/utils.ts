@@ -1,5 +1,6 @@
 import { sha256 } from "@noble/hashes/sha256";
 import { utils } from "@noble/secp256k1";
+import { bs58PublicKeyToBytes } from "deso-protocol";
 
 // This doesn't really do anything. It's just a signal to dev tooling to get
 // syntax highlighting and formatting to work for HTML in template strings
@@ -23,4 +24,19 @@ export function plainTextToHashHex(plaintext: string) {
   const hash = sha256(bytes);
 
   return utils.bytesToHex(hash);
+}
+
+export function isValidPublicKey(publicKey: string) {
+  if (!(publicKey.startsWith("BC") || publicKey.startsWith("tBC"))) {
+    return false;
+  }
+
+  try {
+    // If the public key cannot be decoded into bytes, then it is invalid.
+    bs58PublicKeyToBytes(publicKey);
+  } catch (e) {
+    return false;
+  }
+
+  return true;
 }

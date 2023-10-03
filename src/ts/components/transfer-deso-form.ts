@@ -1,5 +1,5 @@
 import { sendDeso } from "deso-protocol";
-import { html } from "../utils";
+import { html, isValidPublicKey } from "../utils";
 import { CopyToClipboard } from "./copy-to-clipboard";
 
 interface TransferDeSoFormControls extends HTMLFormControlsCollection {
@@ -18,15 +18,19 @@ export class TransferDeSoForm extends HTMLElement {
         <input-group
           inputId="senderPublicKey"
           labelText="Transactor Public Key"
-        ></input-group>
+          required="true"
+        >
+        </input-group>
         <input-group
           inputId="recipientPublicKey"
           labelText="Recipient Public Key"
+          required="true"
         ></input-group>
         <input-group
           inputId="desoAmount"
           inputType="number"
           labelText="$DESO Amount"
+          required="true"
         ></input-group>
       </section>
       <div>
@@ -45,9 +49,7 @@ export class TransferDeSoForm extends HTMLElement {
         to sign it.
       </p>
       <div class="flex items-start mt-2">
-        <div
-          class="w-3/4 rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 p-1.5"
-        >
+        <div class="w-full copy-text-container">
           <span id="transactionHexContainer" class="break-words"></span>
         </div>
         <copy-to-clipboard id="copyTxnHexButton"></copy-to-clipboard>
@@ -62,6 +64,9 @@ export class TransferDeSoForm extends HTMLElement {
 
   connectedCallback() {
     this.rehydratePage();
+
+    // TODO: fix the number input... it's not very user friendly atm.
+
     const sendDesoTxnForm = this.querySelector("form");
     const copyTxnHexButton = this.querySelector(
       "#copyTxnHexButton",
@@ -73,16 +78,71 @@ export class TransferDeSoForm extends HTMLElement {
       );
     }
 
+    sendDesoTxnForm?.addEventListener("input", () => {
+      // clear errors any time the form changes.
+      const errorEls = sendDesoTxnForm.querySelectorAll(
+        "[data-error-for]",
+      ) as NodeListOf<HTMLElement>;
+      errorEls.forEach((el) => {
+        el.textContent = "";
+      });
+    });
+
     sendDesoTxnForm?.addEventListener("submit", async function (event) {
       event.preventDefault();
       const form = event.target as HTMLFormElement;
       const formControls = form.elements as TransferDeSoFormControls;
-
-      // TODD: Validate form
-
       const senderPublicKey = formControls.senderPublicKey.value;
       const recipientPublicKey = formControls.recipientPublicKey.value;
       const desoAmount = Number(formControls.desoAmount.value);
+
+      let isFormValid = true;
+      if (!isValidPublicKey(senderPublicKey)) {
+        isFormValid = false;
+        const errorEl = this.querySelector(
+          '[data-error-for="senderPublicKey"]',
+        );
+
+        if (!errorEl) {
+          throw new Error(
+            "No error element found for selector: [data-error-for='senderPublicKey']",
+          );
+        }
+
+        errorEl.textContent = "Invalid public key.";
+      }
+
+      if (!isValidPublicKey(recipientPublicKey)) {
+        isFormValid = false;
+        const errorEl = this.querySelector(
+          '[data-error-for="recipientPublicKey"]',
+        );
+
+        if (!errorEl) {
+          throw new Error(
+            "No error element found for selector: [data-error-for='senderPublicKey']",
+          );
+        }
+
+        errorEl.textContent = "Invalid public key.";
+      }
+
+      if (isNaN(desoAmount) || desoAmount <= 0) {
+        isFormValid = false;
+        const errorEl = this.querySelector('[data-error-for="desoAmount"]');
+
+        if (!errorEl) {
+          throw new Error(
+            "No error element found for selector: [data-error-for='senderPublicKey']",
+          );
+        }
+
+        errorEl.textContent = "Invalid deso amount.";
+      }
+
+      if (!isFormValid) {
+        return;
+      }
 
       // NOTE: local construction requires calling a node to get the current block
       // height so it is not actually offline.
