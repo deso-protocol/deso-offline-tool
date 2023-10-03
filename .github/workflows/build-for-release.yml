@@ -10,12 +10,13 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: 20
+        registry-url: "https://registry.npmjs.org"
 
     - name: Install Dependencies
       run: npm ci
@@ -26,5 +27,5 @@ jobs:
     - name: Archive Production Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: deso-standalone-app
+        name: deso-standalone-app.zip
         path: dist/deso-standalone-app.zip
