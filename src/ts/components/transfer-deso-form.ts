@@ -1,5 +1,6 @@
 import { sendDeso } from "deso-protocol";
-import { html, isValidPublicKey } from "../utils";
+import { addFormError, html, isValidPublicKey } from "../utils";
+import { BaseComponent } from "./base-component";
 import { CopyToClipboard } from "./copy-to-clipboard";
 
 interface TransferDeSoFormControls extends HTMLFormControlsCollection {
@@ -8,7 +9,7 @@ interface TransferDeSoFormControls extends HTMLFormControlsCollection {
   desoAmount: HTMLInputElement;
 }
 
-export class TransferDeSoForm extends HTMLElement {
+export class TransferDeSoForm extends BaseComponent {
   innerHTML = html`
     <form>
       <section class="form-controls">
@@ -57,11 +58,6 @@ export class TransferDeSoForm extends HTMLElement {
     </section>
   `;
 
-  constructor() {
-    super();
-    this.style.display = "block";
-  }
-
   connectedCallback() {
     this.rehydratePage();
 
@@ -70,25 +66,9 @@ export class TransferDeSoForm extends HTMLElement {
     const sendDesoTxnForm = this.querySelector("form");
     const copyTxnHexButton = this.querySelector(
       "#copyTxnHexButton",
-    ) as CopyToClipboard | null;
+    ) as CopyToClipboard;
 
-    if (!copyTxnHexButton) {
-      throw new Error(
-        "No copy txn hex button found for selector: #copyTxnHexButton",
-      );
-    }
-
-    sendDesoTxnForm?.addEventListener("input", () => {
-      // clear errors any time the form changes.
-      const errorEls = sendDesoTxnForm.querySelectorAll(
-        "[data-error-for]",
-      ) as NodeListOf<HTMLElement>;
-      errorEls.forEach((el) => {
-        el.textContent = "";
-      });
-    });
-
-    sendDesoTxnForm?.addEventListener("submit", async function (event) {
+    sendDesoTxnForm?.addEventListener("submit", async (event) => {
       event.preventDefault();
       const form = event.target as HTMLFormElement;
       const formControls = form.elements as TransferDeSoFormControls;
@@ -99,45 +79,17 @@ export class TransferDeSoForm extends HTMLElement {
       let isFormValid = true;
       if (!isValidPublicKey(senderPublicKey)) {
         isFormValid = false;
-        const errorEl = this.querySelector(
-          '[data-error-for="senderPublicKey"]',
-        );
-
-        if (!errorEl) {
-          throw new Error(
-            "No error element found for selector: [data-error-for='senderPublicKey']",
-          );
-        }
-
-        errorEl.textContent = "Invalid public key.";
+        addFormError("senderPublicKey", "Invalid public key.");
       }
 
       if (!isValidPublicKey(recipientPublicKey)) {
         isFormValid = false;
-        const errorEl = this.querySelector(
-          '[data-error-for="recipientPublicKey"]',
-        );
-
-        if (!errorEl) {
-          throw new Error(
-            "No error element found for selector: [data-error-for='senderPublicKey']",
-          );
-        }
-
-        errorEl.textContent = "Invalid public key.";
+        addFormError("recipientPublicKey", "Invalid public key.");
       }
 
       if (isNaN(desoAmount) || desoAmount <= 0) {
         isFormValid = false;
-        const errorEl = this.querySelector('[data-error-for="desoAmount"]');
-
-        if (!errorEl) {
-          throw new Error(
-            "No error element found for selector: [data-error-for='senderPublicKey']",
-          );
-        }
-
-        errorEl.textContent = "Invalid deso amount.";
+        addFormError("desoAmount", "Invalid deso amount.");
       }
 
       if (!isFormValid) {
@@ -158,35 +110,12 @@ export class TransferDeSoForm extends HTMLElement {
         },
       );
 
-      const txHexSection = document.getElementById("transactionHexSection");
-
-      if (!txHexSection) {
-        throw new Error(
-          "No transaction hex section found for selector: #transactionHexSection",
-        );
-      }
-
-      const txHexContainer = txHexSection.querySelector(
-        "#transactionHexContainer",
-      );
-
-      if (!txHexContainer) {
-        throw new Error(
-          "No transaction hex container found for selector: #transactionHexContainer",
-        );
-      }
+      const txHexSection = this.querySelector("#transactionHexSection");
+      const txHexContainer = this.querySelector("#transactionHexContainer");
 
       const txHex = result.constructedTransactionResponse.TransactionHex;
       txHexContainer.textContent = txHex;
       txHexSection.classList.remove("hidden");
-
-      const signTxInput = document.getElementById(
-        "transactionHexToSign",
-      ) as HTMLInputElement | null;
-
-      if (signTxInput) {
-        signTxInput.value = txHex;
-      }
 
       copyTxnHexButton.text = txHex;
     });
@@ -194,13 +123,13 @@ export class TransferDeSoForm extends HTMLElement {
     window.addEventListener("beforeunload", () => {
       const senderPublicKeyInput = this.querySelector(
         "#senderPublicKey",
-      ) as HTMLInputElement | null;
+      ) as HTMLInputElement;
       const recipientPublicKeyInput = this.querySelector(
         "#recipientPublicKey",
-      ) as HTMLInputElement | null;
+      ) as HTMLInputElement;
       const desoAmountInput = this.querySelector(
         "#desoAmount",
-      ) as HTMLInputElement | null;
+      ) as HTMLInputElement;
 
       window.localStorage?.setItem(
         "transferDeSoFormState",
@@ -224,23 +153,17 @@ export class TransferDeSoForm extends HTMLElement {
 
       const senderPublicKeyInput = this.querySelector(
         "#senderPublicKey",
-      ) as HTMLInputElement | null;
+      ) as HTMLInputElement;
       const recipientPublicKeyInput = this.querySelector(
         "#recipientPublicKey",
-      ) as HTMLInputElement | null;
+      ) as HTMLInputElement;
       const desoAmountInput = this.querySelector(
         "#desoAmount",
-      ) as HTMLInputElement | null;
+      ) as HTMLInputElement;
 
-      if (senderPublicKeyInput) {
-        senderPublicKeyInput.value = senderPublicKey;
-      }
-      if (recipientPublicKeyInput) {
-        recipientPublicKeyInput.value = recipientPublicKey;
-      }
-      if (desoAmountInput) {
-        desoAmountInput.value = desoAmount;
-      }
+      senderPublicKeyInput.value = senderPublicKey;
+      recipientPublicKeyInput.value = recipientPublicKey;
+      desoAmountInput.value = desoAmount;
     }
   }
 }

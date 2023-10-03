@@ -1,6 +1,7 @@
 import { verify } from "@noble/secp256k1";
 import { bs58PublicKeyToBytes } from "deso-protocol";
 import { html, plainTextToHashHex } from "../utils";
+import { BaseComponent } from "./base-component";
 
 interface VerifySignatureFormControls extends HTMLFormControlsCollection {
   msgToVerify: HTMLTextAreaElement;
@@ -8,7 +9,7 @@ interface VerifySignatureFormControls extends HTMLFormControlsCollection {
   msgSignature: HTMLTextAreaElement;
 }
 
-export class VerifySignatureForm extends HTMLElement {
+export class VerifySignatureForm extends BaseComponent {
   innerHTML = html`
     <form>
       <section class="form-controls">
@@ -16,34 +17,32 @@ export class VerifySignatureForm extends HTMLElement {
           inputId="msgToVerify"
           labelText="Message Text"
           isTextArea="true"
+          required="true"
         ></input-group>
         <input-group
           inputId="signingPublicKey"
           labelText="Public Key"
           hintText="The public key of the key pair that signed the message."
+          required="true"
         ></input-group>
         <input-group
           inputId="msgSignature"
           labelText="Message Signature"
           isTextArea="true"
+          required="true"
         ></input-group>
       </section>
       <div class="flex items-center">
         <button type="submit" class="primary-button mr-3">Verify</button>
         <p id="verifyResultSuccess" class="text-green-400 hidden">
-          <svg-icon icon="check-circle"></svg-icon> The signature is valid.
+          <svg-icon icon="check-circle"></svg-icon> Valid signature.
         </p>
         <p id="verifyResultError" class="text-red-400 hidden">
-          <svg-icon icon="x-circle"></svg-icon> The signature is invalid.
+          <svg-icon icon="x-circle"></svg-icon> Invalid signature.
         </p>
       </div>
     </form>
   `;
-
-  constructor() {
-    super();
-    this.style.display = "block";
-  }
 
   connectedCallback() {
     this.rehydratePage();
@@ -51,26 +50,10 @@ export class VerifySignatureForm extends HTMLElement {
     const verifyResultSuccessEl = this.querySelector("#verifyResultSuccess");
     const verifyResultErrorEl = this.querySelector("#verifyResultError");
 
-    if (!form) {
-      throw new Error("No form found for selector: form");
-    }
-
-    if (!verifyResultSuccessEl) {
-      throw new Error(
-        "No verify result element found for selector: #verifyResultSuccess",
-      );
-    }
-
-    if (!verifyResultErrorEl) {
-      throw new Error(
-        "No verify result element found for selector: #verifyResultError",
-      );
-    }
-
     form.addEventListener("input", () => {
       // clear the result messages any time the form changes.
-      verifyResultSuccessEl?.classList.add("hidden");
-      verifyResultErrorEl?.classList.add("hidden");
+      verifyResultSuccessEl.classList.add("hidden");
+      verifyResultErrorEl.classList.add("hidden");
     });
 
     form.addEventListener("submit", (event) => {
@@ -128,23 +111,17 @@ export class VerifySignatureForm extends HTMLElement {
 
       const msgToVerifyInput = this.querySelector(
         "#msgToVerify",
-      ) as HTMLTextAreaElement | null;
+      ) as HTMLTextAreaElement;
       const signingPublicKeyInput = this.querySelector(
         "#signingPublicKey",
-      ) as HTMLInputElement | null;
+      ) as HTMLInputElement;
       const msgSignatureInput = this.querySelector(
         "#msgSignature",
-      ) as HTMLInputElement | null;
+      ) as HTMLInputElement;
 
-      if (msgToVerifyInput) {
-        msgToVerifyInput.value = msgToVerify;
-      }
-      if (signingPublicKeyInput) {
-        signingPublicKeyInput.value = signingPublicKey;
-      }
-      if (msgSignatureInput) {
-        msgSignatureInput.value = msgSignature;
-      }
+      msgToVerifyInput.value = msgToVerify;
+      signingPublicKeyInput.value = signingPublicKey;
+      msgSignatureInput.value = msgSignature;
     }
   }
 }

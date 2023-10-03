@@ -1,15 +1,16 @@
 import { escapeHTML, html } from "../utils";
+import { BaseComponent } from "./base-component";
 
 interface BroadcastFormControls extends HTMLFormControlsCollection {
-  signedTxHex: HTMLTextAreaElement;
+  txToBroadcast: HTMLTextAreaElement;
 }
 
-export class BroadcastForm extends HTMLElement {
+export class BroadcastForm extends BaseComponent {
   innerHTML = html`
     <form>
       <section class="form-controls">
         <input-group
-          inputId="signedTxHex"
+          inputId="txToBroadcast"
           labelText="Signed Transaction Hex"
           isTextArea="true"
           required="true"
@@ -44,30 +45,19 @@ export class BroadcastForm extends HTMLElement {
     </form>
   `;
 
-  constructor() {
-    super();
-    this.style.display = "block";
-  }
-
   connectedCallback() {
     const form = this.querySelector("form");
 
-    if (!form) {
-      throw new Error("No form found for selector: form");
-    }
-
     form.addEventListener("input", () => {
-      this.querySelector("#broadcastSuccess")?.classList.add("hidden");
-      this.querySelector("#broadcastError")?.classList.add("hidden");
+      this.querySelector("#broadcastSuccess").classList.add("hidden");
+      this.querySelector("#broadcastError").classList.add("hidden");
     });
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       const formControls = (form as HTMLFormElement)
         .elements as BroadcastFormControls;
-      const txnHex = formControls.signedTxHex.value;
-
-      // TODO: form validation
+      const txnHex = formControls.txToBroadcast.value;
 
       this.broadcast(txnHex);
     });
@@ -101,42 +91,17 @@ export class BroadcastForm extends HTMLElement {
         const explorerLinkEl = this.querySelector("#explorerLink");
         const broadcastErrorEl = this.querySelector("#broadcastError");
 
-        broadcastErrorEl?.classList.add("hidden");
-
-        if (!broadcastSuccessEl) {
-          throw new Error(
-            "No broadcast success element found for selector: #broadcastSuccess",
-          );
-        }
-
-        if (!explorerLinkEl) {
-          throw new Error(
-            "No explorer link element found for selector: #explorerLink",
-          );
-        }
-
+        broadcastErrorEl.classList.add("hidden");
         explorerLinkEl.setAttribute("href", explorerLink);
         broadcastSuccessEl.classList.remove("hidden");
       })
       .catch((error) => {
-        this.querySelector("#broadcastSuccess")?.classList.add("hidden");
+        this.querySelector("#broadcastSuccess").classList.add("hidden");
 
         const broadcastErrorEl = this.querySelector("#broadcastError");
         const broadcastErrorMessageEl = this.querySelector(
           "#broadcastErrorMessage",
         );
-
-        if (!broadcastErrorEl) {
-          throw new Error(
-            "No broadcast error element found for selector: #broadcastError",
-          );
-        }
-
-        if (!broadcastErrorMessageEl) {
-          throw new Error(
-            "No broadcast error message element found for selector: #broadcastErrorMessage",
-          );
-        }
 
         broadcastErrorMessageEl.textContent = error.message;
         broadcastErrorEl.classList.remove("hidden");

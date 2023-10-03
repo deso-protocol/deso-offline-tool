@@ -1,6 +1,7 @@
 import { escapeHTML, html } from "../utils";
+import { BaseComponent } from "./base-component";
 
-export class InputGroup extends HTMLElement {
+export class InputGroup extends BaseComponent {
   static get observedAttributes() {
     return [
       "labelText",
@@ -30,6 +31,11 @@ export class InputGroup extends HTMLElement {
 
     if (!labelText) {
       throw new Error("An input group must have a labelText attribute.");
+    }
+
+    // sanity check we're not using a duplicate inputId
+    if (document.querySelector(`#${inputId}`)) {
+      throw new Error(`Duplicate inputId: ${inputId}`);
     }
 
     const hintTextHtml =
@@ -75,11 +81,27 @@ export class InputGroup extends HTMLElement {
   })();
 
   connectedCallback() {
-    if (this.getAttribute("required") === "true") {
-      this.querySelector("#" + this.getAttribute("inputId"))?.setAttribute(
-        "required",
-        "true",
-      );
+    const inputId = this.getAttribute("inputId");
+    const input = this.querySelector(`#${inputId}`);
+
+    if (!input) {
+      throw new Error(`No input found for selector: #${inputId}`);
     }
+
+    if (this.getAttribute("required") === "true") {
+      input.setAttribute("required", "true");
+    }
+
+    input.addEventListener("input", () => {
+      // Clear errors any time the input changes.
+      this.clearError();
+    });
+  }
+
+  clearError() {
+    const inputId = this.getAttribute("inputId");
+    const errorEl = this.querySelector(`[data-error-for="${inputId}"]`);
+
+    errorEl.textContent = "";
   }
 }

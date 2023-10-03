@@ -40,3 +40,15 @@ export function isValidPublicKey(publicKey: string) {
 
   return true;
 }
+
+export function addFormError(controlId: string, errorMessage: string) {
+  const errorEl = document.querySelector(`[data-error-for="${controlId}"]`);
+
+  if (!errorEl) {
+    throw new Error(
+      `No error element found for selector: [data-error-for='${controlId}']`,
+    );
+  }
+
+  errorEl.textContent = errorMessage;
+}
