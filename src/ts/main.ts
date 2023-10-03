@@ -2,7 +2,6 @@ import { AutoResizingTextarea } from "./components/auto-resizing-textarea";
 import { BroadcastForm } from "./components/broadcast-form";
 import { CopyToClipboard } from "./components/copy-to-clipboard";
 import { DeSoLogo } from "./components/deso-logo";
-import { DownloadButton } from "./components/download-button";
 import { InputGroup } from "./components/input-group";
 import { NetworkStatusIndicator } from "./components/network-status-indicator";
 import { SignForm } from "./components/sign-form";
@@ -18,9 +17,6 @@ define("input-group", InputGroup);
 define("svg-icon", SVGIcon);
 define("deso-logo", DeSoLogo);
 define("network-status-indicator", NetworkStatusIndicator);
-define("download-button", DownloadButton, {
-  extends: "button",
-});
 define("transfer-deso-form", TransferDeSoForm);
 define("sign-form", SignForm);
 define("auto-resizing-textarea", AutoResizingTextarea, {
