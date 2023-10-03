@@ -1,6 +1,7 @@
 import { html } from "../utils";
+import { BaseComponent } from "./base-component";
 
-export class NetworkStatusIndicator extends HTMLElement {
+export class NetworkStatusIndicator extends BaseComponent {
   innerHTML = html`
     <span id="networkOnlineIndicator" class="flex flex-col items-center">
       <svg-icon icon="wifi" class="text-green-500"></svg-icon>
@@ -18,18 +19,6 @@ export class NetworkStatusIndicator extends HTMLElement {
   connectedCallback() {
     const networkOnlineEl = this.querySelector("#networkOnlineIndicator");
     const networkOfflineEl = this.querySelector("#networkOfflineIndicator");
-
-    if (!networkOnlineEl) {
-      throw new Error(
-        "No network status element found for selector: #networkOnlineIndicator",
-      );
-    }
-
-    if (!networkOfflineEl) {
-      throw new Error(
-        "No network status element found for selector: #networkOfflineIndicator",
-      );
-    }
 
     if (navigator.onLine) {
       networkOnlineEl.classList.remove("hidden");

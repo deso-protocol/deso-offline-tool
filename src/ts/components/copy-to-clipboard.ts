@@ -1,6 +1,7 @@
 import { html } from "../utils";
+import { BaseComponent } from "./base-component";
 
-export class CopyToClipboard extends HTMLElement {
+export class CopyToClipboard extends BaseComponent {
   _text: string = "";
 
   get text() {
@@ -35,12 +36,12 @@ export class CopyToClipboard extends HTMLElement {
     window.navigator.clipboard
       .writeText(this._text)
       .then(() => {
-        this.querySelector('[icon="copy"]')?.classList.add("hidden");
-        this.querySelector('[icon="check"]')?.classList.remove("hidden");
+        this.querySelector('[icon="copy"]').classList.add("hidden");
+        this.querySelector('[icon="check"]').classList.remove("hidden");
 
         setTimeout(() => {
-          this.querySelector('[icon="check"]')?.classList.add("hidden");
-          this.querySelector('[icon="copy"]')?.classList.remove("hidden");
+          this.querySelector('[icon="check"]').classList.add("hidden");
+          this.querySelector('[icon="copy"]').classList.remove("hidden");
         }, 2000);
       })
       .catch((err) => {

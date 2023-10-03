@@ -1,6 +1,7 @@
 import { html } from "../utils";
+import { BaseComponent } from "./base-component";
 
-export class DeSoLogo extends HTMLElement {
+export class DeSoLogo extends BaseComponent {
   innerHTML = html`
     <svg
       height="63"
