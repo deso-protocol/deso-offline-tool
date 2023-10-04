@@ -27,5 +27,5 @@ jobs:
     - name: Archive Production Artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: deso-standalone-app
+        name: deso-standalone-app-v${{ github.event.release.tag_name }}
         path: dist/deso-standalone-app.zip
