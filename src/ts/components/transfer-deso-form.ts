@@ -29,9 +29,9 @@ export class TransferDeSoForm extends BaseComponent {
         ></input-group>
         <input-group
           inputId="desoAmount"
-          inputType="number"
           labelText="$DESO Amount"
           required="true"
+          inputType="number"
         ></input-group>
       </section>
       <div>
@@ -58,8 +58,6 @@ export class TransferDeSoForm extends BaseComponent {
 
   connectedCallback() {
     this.rehydratePage();
-
-    // TODO: fix the number input... it's not very user friendly atm.
 
     const sendDesoTxnForm = this.querySelector("form");
     const copyTxnHexButton = this.querySelector(

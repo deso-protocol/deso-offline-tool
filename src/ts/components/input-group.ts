@@ -82,7 +82,8 @@ export class InputGroup extends BaseComponent {
 
   connectedCallback() {
     const inputId = this.getAttribute("inputId");
-    const input = this.querySelector(`#${inputId}`);
+    const input = this.querySelector(`#${inputId}`) as HTMLInputElement;
+    const inputType = this.getAttribute("inputType") ?? "text";
 
     if (!input) {
       throw new Error(`No input found for selector: #${inputId}`);
@@ -90,6 +91,11 @@ export class InputGroup extends BaseComponent {
 
     if (this.getAttribute("required") === "true") {
       input.setAttribute("required", "true");
+    }
+
+    if (inputType === "number") {
+      input.setAttribute("min", "0");
+      input.setAttribute("step", "any");
     }
 
     input.addEventListener("input", () => {
