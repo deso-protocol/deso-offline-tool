@@ -26,3 +26,5 @@ opening `dist/index.html`.
 - Clone this repo
 - Run `npm run start` in the root directory
 - Make changes in the `./src` directory
+
+### Releases
