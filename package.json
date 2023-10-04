@@ -6,11 +6,11 @@
   "scripts": {
     "prepare": "husky install",
     "pre-commit": "tsc --noEmit && prettier --write src && git add .",
-    "check": "tsc --noEmit && prettier --check src",
+    "lint": "tsc --noEmit && prettier --check src",
     "bundle": "esbuild src/ts/main.ts --bundle --minify --sourcemap --outfile=dist/main.js",
     "tailwind": "tailwindcss -i src/style.css -o dist/style.css",
     "zip": "(rm dist/*.zip || true) && zip -r deso-standalone-app.zip dist && mv deso-standalone-app.zip dist",
-    "build": "npm run bundle && npm run tailwind && cp src/index.html dist && npm run zip",
+    "build": "npm run bundle && npm run tailwind && cp -r src/*.png dist && cp src/favicon.ico dist && cp src/index.html dist && npm run zip",
     "watch": "nodemon --watch src -e ts,css,html --exec \"npm run build\"",
     "serve": "browser-sync start --server 'dist' --files 'dist/**/*.*'",
     "start": "npm run build && concurrently \"npm run watch\" \"npm run serve\""
