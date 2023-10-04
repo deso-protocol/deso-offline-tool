@@ -4,7 +4,7 @@
 
 TODO: add link to the live site.
 
-### Offline
+## Offline
 
 There are a few different ways to download the web app:
 
@@ -15,21 +15,23 @@ There are a few different ways to download the web app:
 Once you have the files downloaded, you can run the app by extracting `deso-standalone-app.zip` and
 opening `dist/index.html`.
 
-### Build from source
+## Build from source
 
 - Clone this repo
 - Run `npm run build`
 - Run `open dist/index.html`
 
-### Development
+## Development
 
 - Clone this repo
 - Run `npm run start` in the root directory
 - Make changes in the `./src` directory
 
-### Releases
+## Releases
 
-In the root of repository:
+NOTE: You must have permissions to push to `main`.
+
+On branch `main`:
 
 - Run `npm version {major,minor,patch}`. Choose whichever increment [makes sense
   for your change](https://docs.npmjs.com/about-semantic-versioning#incrementing-semantic-versions-in-published-packages)
