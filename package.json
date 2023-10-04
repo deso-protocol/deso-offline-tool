@@ -13,7 +13,8 @@
     "build": "npm run bundle && npm run tailwind && cp -r src/*.png dist && cp src/favicon.ico dist && cp src/index.html dist && npm run zip",
     "watch": "nodemon --watch src -e ts,css,html --exec \"npm run build\"",
     "serve": "browser-sync start --server 'dist' --files 'dist/**/*.*'",
-    "start": "npm run build && concurrently \"npm run watch\" \"npm run serve\""
+    "start": "npm run build && concurrently \"npm run watch\" \"npm run serve\"",
+    "release": "git push --atomic origin main `git describe --tags --abbrev=0`"
   },
   "keywords": [],
   "author": "",

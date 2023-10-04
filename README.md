@@ -33,4 +33,4 @@ In the root of repository:
 
 - Run `npm version {major,minor,patch}`. Choose whichever increment [makes sense
   for your change](https://docs.npmjs.com/about-semantic-versioning#incrementing-semantic-versions-in-published-packages)
-- Run `git push origin --tags`. This will trigger a github workflow that will create a new release.
+- Run `npm run release`. This will trigger a github workflow that will create a new release.
