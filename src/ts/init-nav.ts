@@ -2,9 +2,10 @@ export function initNav() {
   if (!window.location.hash) {
     window.location.hash =
       window.localStorage.getItem("lastHashLocation") ?? "#generate";
+  } else {
+    // If the page is reloaded on a hash, update the active tab to match the hash.
+    updateActiveTab();
   }
-
-  updateActiveTab();
 
   window.addEventListener("hashchange", function (event) {
     updateActiveTab();
