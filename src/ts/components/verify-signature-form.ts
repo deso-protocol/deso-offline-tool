@@ -59,7 +59,6 @@ export class VerifySignatureForm extends BaseComponent {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      // TODO: form validation
       const formControls = (form as HTMLFormElement)
         .elements as VerifySignatureFormControls;
       const msgText = formControls.msgToVerify.value;
