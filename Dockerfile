@@ -33,7 +33,7 @@ RUN npm run build
 # build minified version of frontend, served via nginx
 FROM nginx:1.17
 
-COPY ./dist/ /usr/share/nginx/html
+COPY --from=frontend frontend/dist/ /usr/share/nginx/html
 COPY --from=frontend frontend/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port
