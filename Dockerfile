@@ -4,6 +4,7 @@ WORKDIR /frontend
 
 # install git
 RUN apk add git
+RUN apk add zip
 
 COPY ./package.json .
 COPY ./package-lock.json .
