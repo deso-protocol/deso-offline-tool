@@ -32,11 +32,11 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       uses: actions/upload-artifact@v3
       with:
-        name: deso-standalone-app-${{ github.ref_name }}
-        path: dist/deso-standalone-app.zip
+        name: deso-offline-tool-${{ github.ref_name }}
+        path: dist/deso-offline-tool.zip
 
     - name: Release
       if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v1
       with:
-        files: dist/deso-standalone-app.zip
+        files: dist/deso-offline-tool.zip
