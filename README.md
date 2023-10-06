@@ -1,4 +1,4 @@
-# DeSo Standalone App
+# DeSo Offline Tool
 
 ## Online
 
