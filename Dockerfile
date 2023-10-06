@@ -2,9 +2,9 @@ FROM node:18.12.0-alpine3.15 AS frontend
 
 WORKDIR /frontend
 
-# install git
 RUN apk add git
 RUN apk add zip
+RUN apk add sed
 
 COPY ./package.json .
 COPY ./package-lock.json .
@@ -13,25 +13,13 @@ COPY ./package-lock.json .
 # into the container so we get docker cache benefits
 RUN npm install
 
-# don't allow any dependencies with vulnerabilities
-#RUN npx audit-ci --low
-
-# running ngcc before build_prod lets us utilize the docker
-# cache and significantly speeds up builds without requiring us
-# to import/export the node_modules folder from the container
-#RUN npm run ngcc
-
 COPY ./tailwind.config.js .
 COPY ./tsconfig.json .
 COPY ./src ./src
 COPY ./nginx.conf .
 
-# use --build-arg environment=custom to specify a custom environment
-ARG environment=prod
-
 RUN npm run build
 
-# build minified version of frontend, served via nginx
 FROM nginx:1.17
 
 COPY --from=frontend frontend/dist/ /usr/share/nginx/html
