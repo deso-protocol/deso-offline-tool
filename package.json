@@ -13,7 +13,7 @@
     "watch": "nodemon --watch src -e ts,css,html --exec \"npm run build\"",
     "serve": "browser-sync start --server 'dist' --files 'dist/**/*.*'",
     "start": "npm run build && concurrently \"npm run watch\" \"npm run serve\"",
-    "release": "git push origin main --tags`"
+    "release": "git push origin main --tags"
   },
   "keywords": [],
   "author": "",
