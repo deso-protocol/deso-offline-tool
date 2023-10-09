@@ -2,13 +2,13 @@
 
 ## Online
 
-TODO: add link to the live site.
+View the live online site here: https://offline.deso.com
 
 ## Offline
 
-There are a few different ways to download the web app:
+There are a few different ways to download the web app and run in offline:
 
-- Download it directly from the live online site by clicking the download button in the main menu.
+- Download it directly from the [live online site](https://offline.deso.com) by clicking the download button in the main menu.
 - Visit the online page, and then in your system menu, click `File` -> `Save Page As`
 - Download a specific `deso-offline-tool.zip` version from the [releases tab on github](https://github.com/deso-protocol/deso-offline-tool/releases).
 
