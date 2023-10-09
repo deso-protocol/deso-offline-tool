@@ -2,10 +2,7 @@ FROM node:18.12.0-alpine3.15 AS frontend
 
 WORKDIR /frontend
 
-RUN apk add git
-RUN apk add zip
-RUN apk add sed
-RUN apk add jq
+RUN apk add git zip sed jq bash
 
 COPY ./package.json .
 COPY ./package-lock.json .
