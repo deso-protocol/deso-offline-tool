@@ -18,6 +18,7 @@ COPY ./tailwind.config.js .
 COPY ./tsconfig.json .
 COPY ./src ./src
 COPY ./nginx.conf .
+COPY ./build.sh .
 
 RUN npm run build
 
