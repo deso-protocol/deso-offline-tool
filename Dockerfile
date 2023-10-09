@@ -5,6 +5,7 @@ WORKDIR /frontend
 RUN apk add git
 RUN apk add zip
 RUN apk add sed
+RUN apk add jq
 
 COPY ./package.json .
 COPY ./package-lock.json .
