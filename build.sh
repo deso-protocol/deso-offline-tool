@@ -28,12 +28,19 @@ fi
 
 echo "Version number updated to $VERSION_NUMBER in $INDEX_FILE."
 
-ZIP_FILE=dist/deso-offline-tool.zip
-
 # Remove existing zip of dist files (if it exists), and recreate it with new build.
-if [ -f "$ZIP_FILE" ]; then
-  rm "$ZIP_FILE"
+if ls dist/*.zip 1>/dev/null 2>&1; then
+  echo "Cleaning up old zip files."
+  rm dist/*.zip
 fi
 
-echo "Creating zip file!"
-zip -r deso-offline-tool.zip dist && mv deso-offline-tool.zip dist
+# Remove any sed backup files
+if ls dist/*.bak 1>/dev/null 2>&1; then
+  echo "Cleaning up old backup files."
+  rm dist/*.bak
+fi
+
+ZIP_FILE_NAME=deso-offline-tool-v$VERSION_NUMBER.zip
+
+echo "Creating new zip file: $ZIP_FILE_NAME"
+zip -r $ZIP_FILE_NAME dist && mv $ZIP_FILE_NAME dist
