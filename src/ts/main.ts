@@ -2,6 +2,7 @@ import { AutoResizingTextarea } from "./components/auto-resizing-textarea";
 import { BroadcastForm } from "./components/broadcast-form";
 import { CopyToClipboard } from "./components/copy-to-clipboard";
 import { DeSoLogo } from "./components/deso-logo";
+import { GenerateMnemonic } from "./components/generate-mnemonic";
 import { InputGroup } from "./components/input-group";
 import { NetworkStatusIndicator } from "./components/network-status-indicator";
 import { SignForm } from "./components/sign-form";
@@ -24,6 +25,7 @@ define("auto-resizing-textarea", AutoResizingTextarea, {
 });
 define("verify-signature-form", VerifySignatureForm);
 define("broadcast-form", BroadcastForm);
+define("generate-mnemonic", GenerateMnemonic);
 
 document.addEventListener("DOMContentLoaded", function () {
   initNav();

@@ -26,15 +26,30 @@ export class InputGroup extends BaseComponent {
     const isTextArea = this.getAttribute("isTextArea") === "true";
 
     if (!inputId) {
+      if (window.location.hostname === "localhost") {
+        alert(
+          "An input group must have an inputId attribute. Please check the console for a stack trace.",
+        );
+      }
       throw new Error("An input group must have an inputId attribute.");
     }
 
     if (!labelText) {
+      if (window.location.hostname === "localhost") {
+        alert(
+          "An input group must have a labelText attribute. Please check the console for a stack trace.",
+        );
+      }
       throw new Error("An input group must have a labelText attribute.");
     }
 
     // sanity check we're not using a duplicate inputId
     if (document.querySelector(`#${inputId}`)) {
+      if (window.location.hostname === "localhost") {
+        alert(
+          `Duplicate inputId: ${inputId}. Please check the console for a stack trace.`,
+        );
+      }
       throw new Error(`Duplicate inputId: ${inputId}`);
     }
 
@@ -75,7 +90,10 @@ export class InputGroup extends BaseComponent {
         <!-- NOTE: We are not using slots for the error bc it requires adopting
         shadow dom which is much more difficult to work with. This achieves more
         or less the same thing with none of the headache -->
-        <span class="text-red-400 text-sm" data-error-for=${inputId}></span>
+        <span
+          class="text-red-400 text-sm break-word"
+          data-error-for=${inputId}
+        ></span>
       </div>
     `;
   })();
@@ -86,11 +104,20 @@ export class InputGroup extends BaseComponent {
     const inputType = this.getAttribute("inputType") ?? "text";
 
     if (!input) {
-      throw new Error(`No input found for selector: #${inputId}`);
+      console.error(`No input found for selector: #${inputId}`);
+      if (window.location.hostname === "localhost") {
+        alert(
+          `No input found for selector: #${inputId}. Please check the console for a stack trace.`,
+        );
+      }
     }
 
     if (this.getAttribute("required") === "true") {
       input.setAttribute("required", "true");
+    }
+
+    if (this.getAttribute("disabled") === "true") {
+      input.setAttribute("disabled", "true");
     }
 
     if (inputType === "number") {
