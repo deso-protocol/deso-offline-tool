@@ -137,6 +137,9 @@ export class GenerateMnemonic extends BaseComponent {
     this.querySelector("#randomEntropy").addEventListener("input", (event) => {
       try {
         const form = this.querySelector("form") as HTMLFormElement;
+        form.querySelectorAll("[data-error-for]").forEach((el) => {
+          el.textContent = "";
+        });
         const formControls = form.elements as GenerateMnemonicFormControls;
         const entropy = utils.hexToBytes(
           formControls.randomEntropy.value.trim(),
@@ -168,6 +171,9 @@ export class GenerateMnemonic extends BaseComponent {
     this.querySelector("#randomMnemonic").addEventListener("input", (event) => {
       try {
         const form = this.querySelector("form") as HTMLFormElement;
+        form.querySelectorAll("[data-error-for]").forEach((el) => {
+          el.textContent = "";
+        });
         const formControls = form.elements as GenerateMnemonicFormControls;
         const mnemonic = formControls.randomMnemonic.value;
         const passphrase = formControls.mnemonicPassphrase.value;
